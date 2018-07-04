@@ -8,10 +8,9 @@ class theftPage
 	{
 		$query = $this->getQuery ();
 
+		# Gets data from database based on query
 		include 'database.php';
 		$database = new database;
-
-		# Gets data from database based on query
 		$result = $database->retrieveData ($query);
 
 		if ($result == array()) {
@@ -84,14 +83,41 @@ class theftPage
 
 		# Creates form to submit new entries to DB
 		$html .= "\n\t<form action=\"/cycletheft.php\">\n\t\tSubmit a New Entry:<br>";
-
-/*
-		# New data entry form
-		foreach($data[0] as $tableHeading=>$value) {
-                        $html .= "\n\t\t<input type=\"text\" name=\"{$tableHeading}\" placeholder=\"{$tableHeading}\"<br>";
-                }
 		$html .= "<input type=\"submit\" value=\"Submit\">\n\t</form>";
-*/
+
+		# Creates list of page numbers
+		$html .= "\n\t<ul>";
+		$html .= "\n\t\t<li>1</li>";
+		$html .= "\n\t\t<li>2</li>";
+		$html .= "\n\t\t<li>3</li>";
+		$html .= "\n\t\t<li>4</li>";
+		$html .= "\n\t\t<li>5</li>";
+		$html .= "\n\t\t<li>6</li>";
+		$html .= "\n\t\t<li>7</li>";
+		$html .= "\n\t\t<li>8</li>";
+		$html .= "\n\t\t<li>9</li>";
+		$html .= "\n\t\t<li>10</li>";
+		$html .= "\n\t\t<li>11</li>";
+		$html .= "\n\t\t<li>12</li>";
+		$html .= "\n\t\t<li>13</li>";
+		$html .= "\n\t\t<li>14</li>";
+		$html .= "\n\t\t<li>15</li>";
+		$html .= "\n\t\t<li>16</li>";
+		$html .= "\n\t\t<li>17</li>";
+		$html .= "\n\t\t<li>18</li>";
+		$html .= "\n\t\t<li>19</li>";
+		$html .= "\n\t\t<li>20</li>";
+		$html .= "\n\t\t<li>21</li>";
+		$html .= "\n\t\t<li>22</li>";
+		$html .= "\n\t\t<li>23</li>";
+		$html .= "\n\t\t<li>24</li>";
+		$html .= "\n\t\t<li>25</li>";
+		$html .= "\n\t\t<li>26</li>";
+		$html .= "\n\t\t<li>27</li>";
+		$html .= "\n\t\t<li>28</li>";
+		$html .= "\n\t\t<li>29</li>";
+		$html .= "\n\t</ul>";
+
  		$html .= "\n\t<h1>Cycle Thefts In Cambridge</h1>";
 		$html .= "\n\t<h2 class='introText'>Click \"ID\" for more info or \"Location\" for a map link</h2>\n";
                 return $html;

@@ -53,3 +53,7 @@ a {
 	list-style-type: none;
 	display: inline-block;
 }
+
+li {
+	display: inline;
+}
