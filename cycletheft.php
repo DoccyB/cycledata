@@ -31,10 +31,9 @@ class theftPage
 
 	private function getQuery ()
 	{
-		# Get the ID
-		$id = false;
 
-		# Checks for a requested item number, and if so, validates and assigns this
+		# Gets ID, Checks for a requested item number, and if so, validates and assigns this
+		$id = false;
 		if (isSet ($_GET['id'])) {
 			if(!ctype_digit ($_GET['id'])) {
 				echo "Invalid ID";
@@ -53,7 +52,15 @@ class theftPage
 			$location = $_GET['location'];
 		}
 
-
+		# Get the page number // LATER CHANGE PAGE=FALSE
+		$page = false;
+		if (isSet ($_GET['page'])) {
+			if(!ctype_digit ($_GET['page'])) {
+				echo  "Page number must be a NUMBER!";
+				die;
+			}
+			$page = $_GET['page'];
+		}
 
 
 
@@ -72,8 +79,13 @@ class theftPage
 			$query  = "select * from crimes WHERE location LIKE '%{$location}%'";
 		}
 
-		return $query;
+		# If page number, select relevant results
+		$pageOffset = $page * 10 - 10;
+		if ($page) {
+			$query  = "select * from crimes LIMIT 10 OFFSET {$pageOffset}";
+		}
 
+		return $query;
 	}
 
 
@@ -90,6 +102,7 @@ class theftPage
 		$html .= "\n\t<form action=\"/cycletheft.php\">\n\t\tSubmit a New Entry:<br>";
 		$html .= "<input type=\"submit\" value=\"Submit\">\n\t</form>";
 
+		# Creates list of page numbers
 		foreach (range(1, 29) as $pageNumber) {
 			$html .= "\n\t\t<li><a href=\"/cycledata/?page={$pageNumber}\">{$pageNumber}</a></li>";
 		}
