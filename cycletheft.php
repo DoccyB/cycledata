@@ -95,24 +95,32 @@ class theftPage
 		$html  = "\n\t<ul class='navbutton'>\n\t\t<li><a href=\"/cycledata/\">Cycle Thefts</a></li>\n\t\t<li><a href=\"/cycledata/collisions.html\">Road Collisions</a></li>\n\t</ul>";
 
 		# Creates form for searching locations
-		$currentPage = $_SERVER['REQUEST_URI'];
-		$html .= "\n\t<form action=\"{$currentPage}\">\n\t\tSearch:<br>\n\t\t<input type=\"text\" name=\"location\" placeholder=\"Search for a location\"<br><br><input type=\"submit\" value=\"Submit\">\n\t</form>";
+		$currentURL = $_SERVER['REQUEST_URI'];
+		$html .= "\n\t<form action=\"{$currentURL}\">\n\t\tSearch:<br>\n\t\t<input type=\"text\" name=\"location\" placeholder=\"Search for a location\"<br><br><input type=\"submit\" value=\"Submit\">\n\t</form>";
 
 		# Creates form to submit new entries to DB
 		$html .= "\n\t<form action=\"/cycletheft.php\">\n\t\tSubmit a New Entry:<br>";
 		$html .= "<input type=\"submit\" value=\"Submit\">\n\t</form>";
 
-		# Creates list of page numbers //Not sure about creating a new instance of database, and dodgy way of accessing count
+		# Creates page navigation bar
 		$database = new database;
-		$countEntries = $database->retrieveData ("SELECT count(*) from crimes");
-		foreach ($countEntries[0] as $x => $count) {
-			$countEntries = $count;
+		$countEntries = $database->retrieveOne ("SELECT count(*) from crimes");
+		$finalPage = ceil ($countEntries / 10);
+		
+		if (isSet ($_GET['page'])) {
+			$currentPage = $_GET['page'];
+		} else {
+			$currentPage = 1;
 		}
+		$previousPage = $currentPage - 1;
+		$nextPage = $currentPage + 1;
 
-		$lastPage = ceil ($countEntries / 10);
-		foreach (range(1, $lastPage) as $pageNumber) {
+		$html .= "\n\t<ul>\n\t\t<li><a href=\"/cycledata/?page={$previousPage}\"><</a></li>";
+		foreach (range(1, $finalPage) as $pageNumber) {
 			$html .= "\n\t\t<li><a href=\"/cycledata/?page={$pageNumber}\">{$pageNumber}</a></li>";
 		}
+		$html .= "\n\t\t<li><a href=\"/cycledata/?page={$nextPage}\">></li></li>\n\t</ul>";
+
 
  		$html .= "\n\t<h1>Cycle Thefts In Cambridge</h1>";
 		$html .= "\n\t<h2 class='introText'>Click \"ID\" for more info or \"Location\" for a map link</h2>\n";

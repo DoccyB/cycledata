@@ -24,6 +24,15 @@ class database
 		}
 		return $result;
 	}
+
+	public function retrieveOne ($query)
+	{
+		$data = $this->retrieveData ($query);
+
+		foreach ($data[0] as $key => $value) {
+                        return $value;
+                }
+	}
 }
 
 ?>
