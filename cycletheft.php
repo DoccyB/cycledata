@@ -52,7 +52,7 @@ class theftPage
 			$location = $_GET['location'];
 		}
 
-		# Get the page number // LATER CHANGE PAGE=FALSE
+		# Get the page number
 		$page = false;
 		if (isSet ($_GET['page'])) {
 			if(!ctype_digit ($_GET['page'])) {
@@ -65,7 +65,7 @@ class theftPage
 
 
 		# Select everything by default
-		$query  = "select id, latitude, longitude, location, status from crimes";
+		$query  = "select id, latitude, longitude, location, status from crimes LIMIT 10";
 
 
 
@@ -82,7 +82,7 @@ class theftPage
 		# If page number, select relevant results
 		$pageOffset = $page * 10 - 10;
 		if ($page) {
-			$query  = "select * from crimes LIMIT 10 OFFSET {$pageOffset}";
+			$query  = "select id, latitude, longitude, location, status from crimes LIMIT 10 OFFSET {$pageOffset}";
 		}
 
 		return $query;
@@ -102,8 +102,15 @@ class theftPage
 		$html .= "\n\t<form action=\"/cycletheft.php\">\n\t\tSubmit a New Entry:<br>";
 		$html .= "<input type=\"submit\" value=\"Submit\">\n\t</form>";
 
-		# Creates list of page numbers
-		foreach (range(1, 29) as $pageNumber) {
+		# Creates list of page numbers //Not sure about creating a new instance of database, and dodgy way of accessing count
+		$database = new database;
+		$countEntries = $database->retrieveData ("SELECT count(*) from crimes");
+		foreach ($countEntries[0] as $x => $count) {
+			$countEntries = $count;
+		}
+
+		$lastPage = ceil ($countEntries / 10);
+		foreach (range(1, $lastPage) as $pageNumber) {
 			$html .= "\n\t\t<li><a href=\"/cycledata/?page={$pageNumber}\">{$pageNumber}</a></li>";
 		}
 
