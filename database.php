@@ -1,4 +1,6 @@
 <?php
+
+# Class which handles database interactions
 class database
 {
 	# Constructs a table from dataset with limited info
@@ -23,4 +25,5 @@ class database
 		return $result;
 	}
 }
+
 ?>

@@ -1,4 +1,6 @@
 <?php
+
+# Class to render blocks of HTML
 class html
 {
 	public function makeTable ($data)
@@ -24,4 +26,5 @@ class html
                 return $table;
         }
 }
+
 ?>
