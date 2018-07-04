@@ -1,0 +1,55 @@
+body {
+	background: white;
+	font-family: arial;
+}
+
+h1 {
+	color: black;
+	padding: 5px;
+	margin: 0px;
+	font-family: western;
+	text-align: center;
+}
+
+.introText {
+	font-weight: bold;
+	text-align: center;
+	font-size: 150%;
+	margin: 10px;
+	color: black;
+}
+
+table {
+	border-collapse: collapse;
+	text-align: center;
+	margin: 0 auto;
+	
+}
+
+tr:nth-child(even) {
+	background-color: lightgray;
+}
+
+tr:hover {
+	background-color: #999;
+}
+
+th {
+	background-color: #999;
+	border-collapse: collapse;
+}
+
+th, td {
+	padding: 5px;
+
+}
+
+a {
+	text-decoration: none;
+}
+
+.navbutton {
+	background-color: #999;
+	list-style-type: none;
+	display: inline-block;
+}
