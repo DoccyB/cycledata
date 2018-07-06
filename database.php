@@ -25,7 +25,7 @@ class database
 		return $result;
 	}
 
-	public function retrieveOne ($query)
+	public function retrieveOneValue ($query)
 	{
 		$data = $this->retrieveData ($query);
 
@@ -33,6 +33,51 @@ class database
                         return $value;
                 }
 	}
+
+	 public function retrieveFirst ($query)
+        {
+                $data = $this->retrieveData ($query);
+		return $data[0];
+	}
+
+	public function getHeadings ($table)
+	{
+		$fullFields = $this->retrieveData("SHOW full fields FROM {$table}");
+
+		$headings = array();
+		foreach ($fullFields as $column) {
+			$field = $column["Field"];
+			$comment = $column["Comment"];
+                	$headings[$field] = $comment;
+   	        }
+		return $headings;
+
+	}
+
+	public function newRow ($table, $values)
+	{
+		include '.config.php';
+                $dbName = 'cycletheft';
+                $pdo = new PDO ("mysql:host=localhost;dbname={$dbName}", "root", $password);
+
+
+		foreach ($values as $key => $value) {
+			$values[$key] = str_replace ("'", "\'", $value);
+		}
+
+		$newCols = "(";
+		$newCols .= implode(", ", array_keys($values));
+		$newCols .= ")";
+		$newVals = "('";
+		$newVals .= implode("', '", $values);
+		$newVals .= "')";
+
+		$query = "INSERT INTO {$table} {$newCols} VALUES {$newVals}";
+		echo $query;
+		$pdo->query ($query);
+
+	}
+
 }
 
 ?>
