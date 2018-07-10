@@ -3,13 +3,15 @@
 # Class which handles database interactions
 class database
 {
+	private $dbName = 'cycletheft';
+	
 	# Constructs a table from dataset with limited info
 	public function retrieveData ($query)
 	{
+
 		# connect to DB
 		include '.config.php';
-		$dbName = 'cycletheft';
-		$pdo = new PDO ("mysql:host=localhost;dbname={$dbName}", "root", $password);
+		$pdo = new PDO ("mysql:host=localhost;dbname={$this->dbName}", "root", $password);
 
 		# retrieve data
 		$data = $pdo->query ($query, PDO::FETCH_ASSOC);
@@ -57,8 +59,7 @@ class database
 	public function newRow ($table, $values)
 	{
 		include '.config.php';
-                $dbName = 'cycletheft';
-                $pdo = new PDO ("mysql:host=localhost;dbname={$dbName}", "root", $password);
+                $pdo = new PDO ("mysql:host=localhost;dbname={$this->dbName}", "root", $password);
 /*
 		$stmt = $pdo->prepare("INSERT INTO {$table} (heading, value) VALUES (:heading, :value)");
 		foreach($values as $heading => $value) {
