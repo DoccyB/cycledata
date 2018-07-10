@@ -94,16 +94,3 @@ a {
 .pageBar li a:hover {
 	background-color: lightgray;
 }
-
-
-/*
-.pageBar {
-	text-align: center;
-}
-
-.pageBar li {
-	display: inline;
-	padding: 5px;
-	text-decoration: none;
-}
-*/
