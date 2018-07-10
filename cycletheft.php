@@ -99,16 +99,15 @@ class theftPage
 		$database = new database;
 
 		# Creates main page navigation bar
-		$html  = "\n\t<ul class='navbutton'>\n\t\t<li><a href=\"/cycledata/\">Cycle Thefts</a></li>\n\t\t<li><a href=\"/cycledata/collisions.html\">Road Collisions</a></li>\n\t</ul>";
+		$html  = "\n\t<ul class='navbutton'>\n\t\t<li><a href=\"/cycledata/\">Cycle Thefts</a></li>\n\t\t<li><a href=\"/cycledata/collisions.html\">Road Collisions</a></li>\n\t</ul><br>";
 
 		# Creates form for searching locations
 		$currentURL = $_SERVER['REQUEST_URI'];
-		$html .= "\n\t<form action=\"{$currentURL}\">\n\t\tSearch:<br>\n\t\t<input type=\"text\" name=\"location\" placeholder=\"Search for a location\"<br><br><input type=\"submit\" value=\"Submit\">\n\t</form>";
+		$html .= "\n\t<form action=\"{$currentURL}\">\n\t\tSearch:<br>\n\t\t<input type=\"text\" name=\"location\" placeholder=\"Search for a location\"<br><br><input type=\"submit\" value=\"Search\">\n\t</form>";
+
 
 		# Creates form to submit new entries to DB
-		$html .= "\n\t<form action=\"{$currentURL}\" method=\"post\">\n\t\tSubmit a New Entry:<br>";
-
-
+		$html .= "\n\t<form id=\"newEntryForm\"action=\"{$currentURL}\" method=\"post\">\n\t\tSubmit a New Entry:<br>";
 		# Loops through headings and creates input value for form
 		$headings = $database->getHeadings ("crimes");
          	foreach ($headings as $heading => $comment) {
@@ -128,7 +127,7 @@ class theftPage
 		$previousPage = $currentPage - 1;
 		$nextPage = $currentPage + 1;
 
-		$html .= "\n\t<ul>\n\t\t<li><a href=\"/cycledata/?page={$previousPage}\"><</a></li>";
+		$html .= "\n\t<ul class=\"pageBar\">\n\t\t<li><a href=\"/cycledata/?page={$previousPage}\"><</a></li>";
 		foreach (range(1, $finalPage) as $pageNumber) {
 			$html .= "\n\t\t<li><a href=\"/cycledata/?page={$pageNumber}\">{$pageNumber}</a></li>";
 		}
