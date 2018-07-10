@@ -61,7 +61,19 @@
                 data: params,
                 dataType: 'json',
                 success: function (data) {
-                    L.geoJson(data).addTo(map);
+                    L.geoJson(data, {
+
+                        // Set popup
+                        onEachFeature: function (feature, layer) {
+                            //console.log(feature.properties);
+                            var popupContent = '<p><strong>Crime Number: ' + feature.properties.id + '</strong></p>';
+                            popupContent += '<p>Date: ' + feature.properties.date + '</p>';
+                            popupContent += '<p>Location: ' + feature.properties.location + '</p>';
+                            layer.bindPopup(popupContent);
+                        }
+
+                    }).addTo(map);
+
                 }
             });
         }
