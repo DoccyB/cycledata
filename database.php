@@ -4,17 +4,23 @@
 class database
 {
 	private $dbName = 'cycletheft';
-	
+	private $pdo;
+
+	public function __construct ()
+	{
+		# connect to DB
+		include '.config.php';
+		$this->pdo = new PDO ("mysql:host=localhost;dbname={$this->dbName}", "root", $password);
+
+	}
+
 	# Constructs a table from dataset with limited info
 	public function retrieveData ($query)
 	{
 
-		# connect to DB
-		include '.config.php';
-		$pdo = new PDO ("mysql:host=localhost;dbname={$this->dbName}", "root", $password);
 
 		# retrieve data
-		$data = $pdo->query ($query, PDO::FETCH_ASSOC);
+		$data = $this->pdo->query ($query, PDO::FETCH_ASSOC);
 
 		$result = array();
 
@@ -58,10 +64,8 @@ class database
 
 	public function newRow ($table, $values)
 	{
-		include '.config.php';
-                $pdo = new PDO ("mysql:host=localhost;dbname={$this->dbName}", "root", $password);
 /*
-		$stmt = $pdo->prepare("INSERT INTO {$table} (heading, value) VALUES (:heading, :value)");
+		$stmt = $this->pdo->prepare("INSERT INTO {$table} (heading, value) VALUES (:heading, :value)");
 		foreach($values as $heading => $value) {
 			$stmt->bindparam('heading', $h);
 			$stmt->bindparam('value', $v);
@@ -86,7 +90,7 @@ class database
 
 		$query = "INSERT INTO {$table} {$newCols} VALUES {$newVals}";
 		echo $query;
-		$pdo->query ($query);
+		$this->pdo->query ($query);
 
 	}
 
