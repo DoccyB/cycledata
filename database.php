@@ -3,14 +3,13 @@
 # Class which handles database interactions
 class database
 {
-	private $dbName = 'cycletheft';
 	private $pdo;
 
-	public function __construct ()
+	public function __construct ($dbName)
 	{
 		# connect to DB
 		include '.config.php';
-		$this->pdo = new PDO ("mysql:host=localhost;dbname={$this->dbName}", "root", $password);
+		$this->pdo = new PDO ("mysql:host=localhost;dbname={$dbName}", "root", $password);
 
 	}
 
