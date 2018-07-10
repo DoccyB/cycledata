@@ -9,7 +9,7 @@ class collisionPage
                 $query = $this->getQuery ();
 
 	       	include 'database.php';
-		$database = new database;
+		$database = new database ("cycletheft");
 
 		$result = $database->retrieveData ($query);
 		$result = $this->reassignKeys ($result);
