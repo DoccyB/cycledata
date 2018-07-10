@@ -6,8 +6,13 @@ class API
 {
 	public function __construct ()
 	{
+		# retrieve data
 		$query = $this->bboxQuery ();
-		$this->convertJson ($query);
+		include 'database.php';
+		$database = new database;
+
+		$data = $database->retrieveData ($query);
+		$this->convertJson ($data);
 	}
 
 	private function bboxQuery ()
@@ -30,19 +35,12 @@ class API
 	}
 
 
-	private function convertJson ($query)
+	private function convertJson ($data)
 	{
-		// deal with data retrieval in cycletheft later
-		include 'database.php';
-		$database = new database;
-		$data = $database->retrieveData ($query);
-
-
-
 		$features = array();
 		foreach ($data as $point) {
 
-			//add each feature
+			# add each feature
 			$features[] = array(
 				"type" => "Feature",
 				"properties" => $point,
