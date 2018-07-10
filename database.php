@@ -59,6 +59,17 @@ class database
 		include '.config.php';
                 $dbName = 'cycletheft';
                 $pdo = new PDO ("mysql:host=localhost;dbname={$dbName}", "root", $password);
+/*
+		$stmt = $pdo->prepare("INSERT INTO {$table} (heading, value) VALUES (:heading, :value)");
+		foreach($values as $heading => $value) {
+			$stmt->bindparam('heading', $h);
+			$stmt->bindparam('value', $v);
+
+			$h = $heading;
+			$v = $value;
+			$stmt->execute();
+		}
+*/
 
 
 		foreach ($values as $key => $value) {
