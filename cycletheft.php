@@ -8,7 +8,7 @@ class theftPage
 	{
 		# Gets data from database based on query
 		include 'database.php';
-		$database = new database;
+		$database = new database ("cycletheft");
 
 		$query = $this->getQuery ();
 		$result = $database->retrieveData ($query);
@@ -18,12 +18,21 @@ class theftPage
 		} else {
 			$result = $this->reassignKeys ($result);
 
-			$html = $this->topOfPage ($result);
+			# index.html top
+			$html = "<html>\n<head>\n\t<title>CycleThefts</title>\n\t<link href=\"style.css\" rel=\"stylesheet\" type = \"text/css\"/>\n</head>\n<body>";
+
+
+			$html .= $this->topOfPage ($result);
 
 			include 'html.php';
 			$htmlClass = new html;
 
 			$html .= $htmlClass->makeTable ($result);
+
+			# index.html bottom
+			$html .= "\n</body>\n</html>";
+
+
 			echo $html;
 		}
 	}
@@ -32,7 +41,7 @@ class theftPage
 	private function getQuery ()
 	{
 
-		$database = new database;
+		$database = new database ("cycletheft");
 		# Gets ID, Checks for a requested item number, and if so, validates and assigns this
 		$id = false;
 		if (isSet ($_GET['id'])) {
@@ -96,7 +105,7 @@ class theftPage
         # Constructs home button and intro text
 	private function topOfPage ($data)
         {
-		$database = new database;
+		$database = new database ("cycletheft");
 
 		# Creates main page navigation bar
 		$html  = "\n\t<ul class='navbutton'>\n\t\t<li><a href=\"/cycledata/\">Cycle Thefts</a></li>\n\t\t<li><a href=\"/cycledata/collisions.html\">Road Collisions</a></li>\n\t</ul><br>";
