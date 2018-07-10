@@ -39,8 +39,6 @@ class API
 
 		$features = array();
 		foreach ($data as $point) {
-			
-			
 			$features[] = array(
 				"type" => "Feature",
 				"properties" => array(
@@ -60,6 +58,7 @@ class API
 				)
 			);
 		}
+
 		$geojson = array(
 			"type" => "FeatureCollection",
 			"count" => count ($features),
