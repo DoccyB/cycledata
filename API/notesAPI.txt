@@ -1,0 +1,17 @@
+API + map framework code
+@@@@@@@@@@@@@@
+
+API:
+
+- Create a completely new class for the API (which will include the database.php library)
+- Get data from database, comes back as array of arrays
+- Re-loop to convert it to GeoJSON -style structure
+	- https://en.wikipedia.org/wiki/GeoJSON
+- json_encode to serve the page as JSON not a string
+- Later, pick up the bbox
+
+
+Frond end:
+
+- Copy the Javascript code that is in the presentation
+- Lay out the pop up in a different format
