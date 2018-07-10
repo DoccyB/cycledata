@@ -37,21 +37,15 @@ class API
 		$database = new database;
 		$data = $database->retrieveData ($query);
 
+
+
 		$features = array();
 		foreach ($data as $point) {
+
+			//add each feature
 			$features[] = array(
 				"type" => "Feature",
-				"properties" => array(
-					'id' => $point['id'],
-					'crimeId' => $point['crimeId'],
-					'date' => $point['date'],
-					'reportedBy' => $point['reportedBy'],
-					'location' => $point['location'],
-					'status' => $point['status'],
-					'latitude' => $point['latitude'],
-					'longitude'  => $point['longitude']
-
-				),
+				"properties" => $point,
 				"geometry" => array(
 					"type" => "Point",
 					"coordinates" => array(floatval($point['longitude']), floatval($point['latitude']))
