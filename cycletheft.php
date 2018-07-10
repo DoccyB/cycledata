@@ -140,7 +140,7 @@ class theftPage
 		foreach (range(1, $finalPage) as $pageNumber) {
 			$html .= "\n\t\t<li><a href=\"/cycledata/?page={$pageNumber}\">{$pageNumber}</a></li>";
 		}
-		$html .= "\n\t\t<li><a href=\"/cycledata/?page={$nextPage}\">></li></li>\n\t</ul>";
+		$html .= "\n\t\t<li><a href=\"/cycledata/?page={$nextPage}\">></a></li>\n\t</ul>";
 
 		# Creates title and intro
  		$html .= "\n\t<h1>Cycle Thefts In Cambridge</h1>";
