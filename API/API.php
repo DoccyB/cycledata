@@ -9,7 +9,7 @@ class API
 		# retrieve data
 		$query = $this->bboxQuery ();
 		include '../database.php';
-		$database = new database;
+		$database = new database ("cycletheft");
 
 		$data = $database->retrieveData ($query);
 		$this->convertJson ($data);
