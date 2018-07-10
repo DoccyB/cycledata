@@ -45,6 +45,7 @@
 //        geojsonLayer.addTo(map);
 
 
+        var _layer;
         function loadData () {
 
             // Add the GeoJSON data in the file to the map
@@ -61,7 +62,10 @@
                 data: params,
                 dataType: 'json',
                 success: function (data) {
-                    L.geoJson(data, {
+                    if (_layer) {
+                    	map.removeLayer (_layer);
+                    }
+                    _layer = L.geoJson(data, {
 
                         // Set popup
                         onEachFeature: function (feature, layer) {
