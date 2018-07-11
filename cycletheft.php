@@ -14,7 +14,6 @@ class theftPage
 		$smarty->setCacheDir('/var/www/html/smarty/cache/');
 
 		$smarty->assign('name', 'Tom');
-		$smarty->display("cycletheft.tpl");
 
 
 		# Gets data from database based on query
@@ -29,28 +28,14 @@ class theftPage
 		} else {
 			$result = $this->reassignKeys ($result);
 
-			# index.html top
-			$html  = "<html>\n";
-			$html .= "<head>\n\t";
-			$html .= "<title>CycleThefts</title>\n\n\t";
-			$html .= "<link href=\"style.css\" rel=\"stylesheet\" type = \"text/css\"/>\n\t";
-			$html .= "<!-- Load Leaflet.js and styles from a CDN -->\n\t";
-			$html .= "<script src=\"https://unpkg.com/leaflet@1.2.0/dist/leaflet.js\"></script>\n\t";
-			$html .= "<link rel=\"stylesheet\" href=\"https://unpkg.com/leaflet@1.2.0/dist/leaflet.css\"/>\n\t";
-			$html .= "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js\"></script>\n\t";
-			$html .= "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>\n\t";
-			$html .= "<script type=\"text/javascript\" src=\"map.js\"></script>\n\t";
-			$html .= "<style type=\"text/css\">#map {width: 100%; height: 600px;}</style>\n";
-			$html .= "</head>\n";
-			$html .= "<body>";
-
-
-			$html .= $this->topOfPage ($result);
+			$html = $this->topOfPage ($result);
 
 			include 'html.php';
 			$htmlClass = new html;
 
-			$html .= $htmlClass->makeTable ($result);
+			$table = $htmlClass->makeTable ($result);
+			$html .= $table;
+//			$smarty->assign ('table', $table);
 
 			# div for map
 			$html .= "<div id=\"map\"></div>";
@@ -58,6 +43,7 @@ class theftPage
 			# index.html bottom
 			$html .= "\n</body>\n</html>";
 
+			$smarty->display("cycletheft.tpl");
 
 			echo $html;
 		}
