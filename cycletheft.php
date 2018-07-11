@@ -1,11 +1,22 @@
 <?php
-$page = new theftPage;
 
+$page = new theftPage;
 class theftPage
 {
 	# Constructs webpage
 	public function __construct ()
 	{
+		require_once('libraries/smarty/libs/Smarty.class.php');
+		$smarty = new Smarty();
+		$smarty->setTemplateDir('templates/');
+		$smarty->setCompileDir('/var/www/html/smarty/templates_c/');
+		$smarty->setConfigDir('/var/www/html/smarty/configs/');
+		$smarty->setCacheDir('/var/www/html/smarty/cache/');
+
+		$smarty->assign('name', 'Tom');
+		$smarty->display("cycletheft.tpl");
+
+
 		# Gets data from database based on query
 		include 'database.php';
 		$database = new database ("cycletheft");
