@@ -131,13 +131,13 @@ class theftPage
 
 
 		# Creates form to submit new entries to DB
-		$html .= "\n\t<form id=\"newEntryForm\"action=\"{$currentURL}\" method=\"post\">\n\t\tSubmit a New Entry:<br>";
+		$html .= "\n\t<form action=\"{$currentURL}\" method=\"post\">\n\t<table id=\"newEntryForm\" style='width:80%'>\n\t<p>Submit a New Entry:</p>\n\t</tr>\n\t";
 		# Loops through headings and creates input value for form
 		$headings = $database->getHeadings ("crimes");
          	foreach ($headings as $heading => $comment) {
-			$html .= "\n\t\t$comment: <input type=\"text\" name=\"{$heading}\" placeholder=\"{$heading}\"><br>";
+			$html .= "<tr>\n\t\t<td>$comment: </td><td><input type=\"text\" name=\"{$heading}\" placeholder=\"{$heading}\"></td>\n\t</tr>\n\t";
 		}
-		$html .= "\n\t<input type=\"submit\" value=\"Submit\">\n\t</form>";
+		$html .= "\n\t</table>\n\t<p><input type=\"submit\" value=\"Submit\"></p>\n\t</form>";
 
 		# Creates data page navigation bar
 		$countEntries = $database->retrieveOneValue ("SELECT count(*) from crimes");
