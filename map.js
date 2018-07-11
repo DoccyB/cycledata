@@ -12,7 +12,7 @@ $( document ).ready(function() {
         var _layer;
         function loadData () {
             // Add the GeoJSON data in the file to the map
-            var url = 'API.php';
+            var url = 'api/';
             var params = {
                 bbox: map.getBounds().toBBoxString()
             };
