@@ -15,9 +15,6 @@ class theftPage
 		$this->smarty->setConfigDir('/var/www/html/smarty/configs/');
 		$this->smarty->setCacheDir('/var/www/html/smarty/cache/');
 
-		$smarty->assign('name', 'Tom');
-
-
 		# Gets data from database based on query
 		include 'database.php';
 		$database = new database ("cycletheft");
@@ -30,14 +27,19 @@ class theftPage
 		} else {
 			$result = $this->reassignKeys ($result);
 
-			$html = $this->topOfPage ($result);
+
+
+			$this->topOfPage ($result);
+
+			$this->smarty->display("cycletheft.tpl");
+
 
 			include 'html.php';
 			$htmlClass = new html;
 
 			$table = $htmlClass->makeTable ($result);
-			$html .= $table;
-//			$smarty->assign ('table', $table);
+			$html  = $table;
+//			$this->smarty->assign ('table', $table);
 
 			# div for map
 			$html .= "<div id=\"map\"></div>";
@@ -45,7 +47,6 @@ class theftPage
 			# index.html bottom
 			$html .= "\n</body>\n</html>";
 
-			$smarty->display("cycletheft.tpl");
 
 			echo $html;
 		}
@@ -121,27 +122,33 @@ class theftPage
         {
 		$database = new database ("cycletheft");
 
+
 		# Creates main page navigation bar
-		$html  = "\n\t<ul class='navbutton'>\n\t\t<li><a href=\"/cycledata/\">Cycle Thefts</a></li>\n\t\t<li><a href=\"/cycledata/collisions.html\">Road Collisions</a></li>\n\t</ul><br>";
+		$navBar  = "<ul class='navbutton'>\n\t\t<li><a href=\"/cycledata/\">Cycle Thefts</a></li>\n\t\t<li><a href=\"/cycledata/collisions.html\">Road Collisions</a></li>\n\t</ul><br>";
+		$this->smarty->assign ('navBar', $navBar);
+
 
 		# Creates form for searching locations
 		$currentURL = $_SERVER['REQUEST_URI'];
-		$html .= "\n\t<form action=\"{$currentURL}\">\n\t\tSearch:<br>\n\t\t<input type=\"text\" name=\"location\" placeholder=\"Search for a location\"<br><br><input type=\"submit\" value=\"Search\">\n\t</form>";
+		$locationSearch  = "<form action=\"{$currentURL}\">\n\t\tSearch:<br>\n\t\t<input type=\"text\" name=\"location\" placeholder=\"Search for a location\"<br><br><input type=\"submit\" value=\"Search\">\n\t</form>";
+		$this->smarty->assign ('locationSearch', $locationSearch);
 
 
 		# Creates form to submit new entries to DB
-		$html .= "\n\t<form action=\"{$currentURL}\" method=\"post\">\n\t<table id=\"newEntryForm\" style='width:80%'>\n\t<p>Submit a New Entry:</p>\n\t</tr>\n\t";
+		$newEntry = "<form action=\"{$currentURL}\" method=\"post\">\n\t<table id=\"newEntryForm\" style='width:80%'>\n\t<p>Submit a New Entry:</p>\n\t</tr>\n\t";
+
 		# Loops through headings and creates input value for form
 		$headings = $database->getHeadings ("crimes");
          	foreach ($headings as $heading => $comment) {
-			$html .= "<tr>\n\t\t<td>$comment: </td><td><input type=\"text\" name=\"{$heading}\" placeholder=\"{$heading}\"></td>\n\t</tr>\n\t";
+			$newEntry .= "<tr>\n\t\t<td>$comment: </td><td><input type=\"text\" name=\"{$heading}\" placeholder=\"{$heading}\"></td>\n\t</tr>\n\t";
 		}
-		$html .= "\n\t</table>\n\t<p><input type=\"submit\" value=\"Submit\"></p>\n\t</form>";
+		$newEntry .= "\n\t</table>\n\t<p><input type=\"submit\" value=\"Submit\"></p>\n\t</form>";
+		$this->smarty->assign ('newEntry', $newEntry);
+
 
 		# Creates data page navigation bar
 		$countEntries = $database->retrieveOneValue ("SELECT count(*) from crimes");
 		$finalPage = ceil ($countEntries / 10);
-
 		if (isSet ($_GET['page'])) {
 			$currentPage = $_GET['page'];
 		} else {
@@ -149,17 +156,18 @@ class theftPage
 		}
 		$previousPage = $currentPage - 1;
 		$nextPage = $currentPage + 1;
-
-		$html .= "\n\t<ul class=\"pageBar\">\n\t\t<li><a href=\"/cycledata/?page={$previousPage}\"><</a></li>";
+		$dataNavBar = "<ul class=\"pageBar\">\n\t\t<li><a href=\"/cycledata/?page={$previousPage}\"><</a></li>";
 		foreach (range(1, $finalPage) as $pageNumber) {
-			$html .= "\n\t\t<li><a href=\"/cycledata/?page={$pageNumber}\">{$pageNumber}</a></li>";
+			$dataNavBar .= "\n\t\t<li><a href=\"/cycledata/?page={$pageNumber}\">{$pageNumber}</a></li>";
 		}
-		$html .= "\n\t\t<li><a href=\"/cycledata/?page={$nextPage}\">></a></li>\n\t</ul>";
+		$dataNavBar .= "\n\t\t<li><a href=\"/cycledata/?page={$nextPage}\">></a></li>\n\t</ul>";
+		$this->smarty->assign ('dataNavBar', $dataNavBar);
 
 		# Creates title and intro
- 		$html .= "\n\t<h1>Cycle Thefts In Cambridge</h1>";
-		$html .= "\n\t<h2 class='introText'>Click \"ID\" for more info or \"Location\" for a map link</h2>\n";
-                return $html;
+ 		$pageTitle = "<h1>Cycle Thefts In Cambridge</h1>";
+		$this->smarty->assign ('pageTitle', $pageTitle);
+		$pageIntro = "<h2 class='introText'>Click \"ID\" for more info or \"Location\" for a map link</h2>";
+		$this->smarty->assign ('pageIntro', $pageIntro);
         }
 
 

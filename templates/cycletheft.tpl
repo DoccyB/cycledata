@@ -15,3 +15,14 @@
 	{literal}<style type="text/css">#map {width: 100%; height: 600px;}</style>{/literal}
 </head>
 <body>
+	{$navBar}
+
+	{$locationSearch}
+
+	{$newEntry}
+
+	{$dataNavBar}
+
+	{$pageTitle}
+
+	{$pageIntro}
