@@ -26,3 +26,9 @@
 	{$pageTitle}
 
 	{$pageIntro}
+
+	{$table}
+
+	{$map}
+</body>
+</html>

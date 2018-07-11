@@ -27,28 +27,19 @@ class theftPage
 		} else {
 			$result = $this->reassignKeys ($result);
 
-
-
 			$this->topOfPage ($result);
 
-			$this->smarty->display("cycletheft.tpl");
-
-
-			include 'html.php';
+			require_once('html.php');
 			$htmlClass = new html;
 
 			$table = $htmlClass->makeTable ($result);
-			$html  = $table;
-//			$this->smarty->assign ('table', $table);
+			$this->smarty->assign ('table', $table);
 
 			# div for map
-			$html .= "<div id=\"map\"></div>";
+			$map = "<div id=\"map\"></div>";
+			$this->smarty->assign ('map', $map);
 
-			# index.html bottom
-			$html .= "\n</body>\n</html>";
-
-
-			echo $html;
+			$this->smarty->display("cycletheft.tpl");
 		}
 	}
 
@@ -95,8 +86,6 @@ class theftPage
 		# Select everything by default
 		$query  = "select id, latitude, longitude, location, status from crimes LIMIT 10";
 
-
-
 		# If Id, select one result
 		if ($id) {
 			$query  = "select * from crimes WHERE id = '{$id}'";
@@ -122,11 +111,9 @@ class theftPage
         {
 		$database = new database ("cycletheft");
 
-
 		# Creates main page navigation bar
 		$navBar  = "<ul class='navbutton'>\n\t\t<li><a href=\"/cycledata/\">Cycle Thefts</a></li>\n\t\t<li><a href=\"/cycledata/collisions.html\">Road Collisions</a></li>\n\t</ul><br>";
 		$this->smarty->assign ('navBar', $navBar);
-
 
 		# Creates form for searching locations
 		$currentURL = $_SERVER['REQUEST_URI'];
