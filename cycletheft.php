@@ -3,15 +3,17 @@
 $page = new theftPage;
 class theftPage
 {
+	private $smarty;
+
 	# Constructs webpage
 	public function __construct ()
 	{
 		require_once('libraries/smarty/libs/Smarty.class.php');
-		$smarty = new Smarty();
-		$smarty->setTemplateDir('templates/');
-		$smarty->setCompileDir('/var/www/html/smarty/templates_c/');
-		$smarty->setConfigDir('/var/www/html/smarty/configs/');
-		$smarty->setCacheDir('/var/www/html/smarty/cache/');
+		$this->smarty = new Smarty();
+		$this->smarty->setTemplateDir('templates/');
+		$this->smarty->setCompileDir('/var/www/html/smarty/templates_c/');
+		$this->smarty->setConfigDir('/var/www/html/smarty/configs/');
+		$this->smarty->setCacheDir('/var/www/html/smarty/cache/');
 
 		$smarty->assign('name', 'Tom');
 
