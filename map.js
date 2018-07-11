@@ -7,8 +7,6 @@ $( document ).ready(function() {
             attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 	// Add the GeoJSON data in the file to the map
-//        var geojsonLayer = new L.GeoJSON.AJAX('API.php');
-//        geojsonLayer.addTo(map);
         var _layer;
         function loadData () {
             // Add the GeoJSON data in the file to the map
