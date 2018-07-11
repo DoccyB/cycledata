@@ -4,6 +4,7 @@ $page = new theftPage;
 class theftPage
 {
 	private $smarty;
+	private $database;
 
 	# Constructs webpage
 	public function __construct ()
@@ -15,12 +16,11 @@ class theftPage
 		$this->smarty->setConfigDir('/var/www/html/smarty/configs/');
 		$this->smarty->setCacheDir('/var/www/html/smarty/cache/');
 
-		# Gets data from database based on query
-		include 'database.php';
-		$database = new database ("cycletheft");
+		require_once ('database.php');
+		$this->database = new database ("cycletheft");
 
 		$query = $this->getQuery ();
-		$result = $database->retrieveData ($query);
+		$result = $this->database->retrieveData ($query);
 
 		if ($result == array()) {
 			echo "No matches for your search";
@@ -47,7 +47,6 @@ class theftPage
 	private function getQuery ()
 	{
 
-		$database = new database ("cycletheft");
 		# Gets ID, Checks for a requested item number, and if so, validates and assigns this
 		$id = false;
 		if (isSet ($_GET['id'])) {
@@ -80,7 +79,7 @@ class theftPage
 
 		# Execute form submitted for new entry
 		if ($_POST) {
-			$database->newRow("crimes", $_POST);
+			$this->database->newRow("crimes", $_POST);
 		}
 
 		# Select everything by default
@@ -109,8 +108,6 @@ class theftPage
         # Constructs home button and intro text
 	private function topOfPage ($data)
         {
-		$database = new database ("cycletheft");
-
 		# Creates main page navigation bar
 		$navBar  = "<ul class='navbutton'>\n\t\t<li><a href=\"/cycledata/\">Cycle Thefts</a></li>\n\t\t<li><a href=\"/cycledata/collisions.html\">Road Collisions</a></li>\n\t</ul><br>";
 		$this->smarty->assign ('navBar', $navBar);
@@ -125,7 +122,7 @@ class theftPage
 		$newEntry = "<form action=\"{$currentURL}\" method=\"post\">\n\t<table id=\"newEntryForm\" style='width:80%'>\n\t<p>Submit a New Entry:</p>\n\t</tr>\n\t";
 
 		# Loops through headings and creates input value for form
-		$headings = $database->getHeadings ("crimes");
+		$headings = $this->database->getHeadings ("crimes");
          	foreach ($headings as $heading => $comment) {
 			$newEntry .= "<tr>\n\t\t<td>$comment: </td><td><input type=\"text\" name=\"{$heading}\" placeholder=\"{$heading}\"></td>\n\t</tr>\n\t";
 		}
@@ -134,7 +131,7 @@ class theftPage
 
 
 		# Creates data page navigation bar
-		$countEntries = $database->retrieveOneValue ("SELECT count(*) from crimes");
+		$countEntries = $this->database->retrieveOneValue ("SELECT count(*) from crimes");
 		$finalPage = ceil ($countEntries / 10);
 		if (isSet ($_GET['page'])) {
 			$currentPage = $_GET['page'];
