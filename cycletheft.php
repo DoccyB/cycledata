@@ -160,7 +160,7 @@ class theftPage
 	private function reassignKeys ($crimeData)
 	{
 		foreach ($crimeData as $index => $row) {
-			$row['id'] = "<a href=\"/cycledata/?id={$row['id']}\">{$row['id']}</a>";
+			$row['id'] = "<a href=\"/cycledata/{$row['id']}/\">{$row['id']}</a>";
 			$row['location'] = "\n\t\t<a href=\"https:/\/www.openstreetmap.org/#map=18/{$row['latitude']}/{$row['longitude']}\" target=\"_blank\">{$row['location']}</a>";
 			$crimeData[$index] = $row;
 		}
