@@ -10,8 +10,8 @@
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"/>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script type="text/javascript" src="map.js"></script>
-	<link href="style.css" rel="stylesheet" type = "text/css"/>
+	<script type="text/javascript" src="/cycledata/map.js"></script>
+	<link href="/cycledata/style.css" rel="stylesheet" type = "text/css"/>
 	{literal}<style type="text/css">#map {width: 50%; height: 400px;}</style>{/literal}
 </head>
 <body>

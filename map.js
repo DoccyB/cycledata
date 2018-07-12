@@ -10,7 +10,7 @@ $( document ).ready(function() {
         var _layer;
         function loadData () {
             // Add the GeoJSON data in the file to the map
-            var url = 'api/';
+            var url = '/cycledata/api/';
             var params = {
                 bbox: map.getBounds().toBBoxString()
             };
