@@ -141,9 +141,12 @@ class theftPage
 		$previousPage = $currentPage - 1;
 		$nextPage = $currentPage + 1;
 
-		$this->smarty->assign ('previousPage', $previousPage);
-		$this->smarty->assign ('nextPage', $nextPage);
-		$this->smarty->assign ('finalPage', $finalPage);
+		$pagination = array (
+			'finalPage' => $finalPage,
+			'nextPage' => $nextPage,
+			'previousPage' => $previousPage,
+		);
+		$this->smarty->assign ('pagination', $pagination);
 
 
 		# Creates title and intro
