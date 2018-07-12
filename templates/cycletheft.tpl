@@ -24,11 +24,11 @@
 	</ul><br>
 
 
-{* LOCATION SEARCH BAR *}
+{* LOCATION SEARCH *}
 	<form action="{$currentUrl}">
-		Search:<br>
-		<input type="text" name="location" placeholder="Search for a location"><br>
-		<input type="submit" value="Search">
+		Search for a location:
+		<input type="text" name="location" placeholder="e.g. mill road">
+		<input type="submit" value="Go!">
 	</form>
 
 
@@ -36,9 +36,9 @@
 	<ul class="pageBar">
 		<li><a href="/cycledata/page/{$pagination.previousPage}/"><</a></li>
 	{for $pageNumber = 1 to $pagination.finalPage}
-		<li><a href="/cycledata/page/{$pageNumber}/">{$pageNumber}</a></li>
-        {/for}
-		<li><a href="/cycledata/page/{$pagination.nextPage}/">></a></li>
+	<li><a href="/cycledata/page/{$pageNumber}/">{$pageNumber}</a></li>
+	{/for}
+	<li><a href="/cycledata/page/{$pagination.nextPage}/">></a></li>
 	</ul>
 
 {* PAGE TITLE *}
@@ -55,16 +55,16 @@
 
 {* NEW ENTRY *}
 	<form action="{$currentUrl}" method="post">
-	<p>Submit a New Entry:</p>
-	<table id="newEntryForm" style='width:80%'>
+		<p>Submit a New Entry:</p>
+		<table id="newEntryForm" style='width:80%'>
 	{foreach $headings as $heading => $comment}
 	<tr>
-		<td>{$comment}: </td>
-		<td><input type="text" name="{$heading}" placeholder="{$heading}"></td>
-	</tr>
+			<td>{$comment}: </td>
+			<td><input type="text" name="{$heading}" placeholder="{$heading}"></td>
+		</tr>
 	{/foreach}
 	</table>
-	<p><input type="submit" value="Submit"></p>
+		<p><input type="submit" value="Submit"></p>
 	</form>
 
 </body>
