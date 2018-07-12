@@ -41,12 +41,13 @@
 		<li><a href="/cycledata/page/{$pagination.nextPage}/">></a></li>
 	</ul>
 
+{* PAGE TITLE *}
+	<h1>Cycle Thefts In Cambridge</h1>
 
+{* PAGE INTRO *}
+	<h2 class='introText'>Click "ID" for more info or "Location" for a map link</h2>
 
-	{$pageTitle}
-
-	{$pageIntro}
-
+{* DATA TABLE *}
 	{$table}
 
 {* MAP *}

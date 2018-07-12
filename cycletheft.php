@@ -131,12 +131,6 @@ class theftPage
 		);
 		$this->smarty->assign ('pagination', $pagination);
 
-
-		# Creates title and intro
- 		$pageTitle = "<h1>Cycle Thefts In Cambridge</h1>";
-		$this->smarty->assign ('pageTitle', $pageTitle);
-		$pageIntro = "<h2 class='introText'>Click \"ID\" for more info or \"Location\" for a map link</h2>";
-		$this->smarty->assign ('pageIntro', $pageIntro);
         }
 
 
