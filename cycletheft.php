@@ -140,12 +140,11 @@ class theftPage
 		}
 		$previousPage = $currentPage - 1;
 		$nextPage = $currentPage + 1;
-		$dataNavBar = "<ul class=\"pageBar\">\n\t\t<li><a href=\"/cycledata/?page={$previousPage}\"><</a></li>";
-		foreach (range(1, $finalPage) as $pageNumber) {
-			$dataNavBar .= "\n\t\t<li><a href=\"/cycledata/?page={$pageNumber}\">{$pageNumber}</a></li>";
-		}
-		$dataNavBar .= "\n\t\t<li><a href=\"/cycledata/?page={$nextPage}\">></a></li>\n\t</ul>";
-		$this->smarty->assign ('dataNavBar', $dataNavBar);
+
+		$this->smarty->assign ('previousPage', $previousPage);
+		$this->smarty->assign ('nextPage', $nextPage);
+		$this->smarty->assign ('finalPage', $finalPage);
+
 
 		# Creates title and intro
  		$pageTitle = "<h1>Cycle Thefts In Cambridge</h1>";

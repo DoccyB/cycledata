@@ -12,16 +12,29 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="map.js"></script>
 	<link href="style.css" rel="stylesheet" type = "text/css"/>
-	{literal}<style type="text/css">#map {width: 100%; height: 600px;}</style>{/literal}
+	{literal}<style type="text/css">#map {width: 50%; height: 400px;}</style>{/literal}
 </head>
 <body>
+
+
+
+
+
 	{$navBar}
 
 	{$locationSearch}
 
-	{$newEntry}
 
-	{$dataNavBar}
+{* PAGE BAR *}
+	<ul class="pageBar">
+		<li><a href="/cycledata/?page={$previousPage}"><</a></li>
+	{for $pageNumber = 1 to $finalPage}
+		<li><a href="/cycledata/?page={$pageNumber}">{$pageNumber}</a></li>
+        {/for}
+		<li><a href="/cycledata/?page={$nextPage}">></a></li>
+	</ul>
+
+
 
 	{$pageTitle}
 
@@ -30,5 +43,7 @@
 	{$table}
 
 	{$map}
+
+	{$newEntry}
 </body>
 </html>
