@@ -17,13 +17,22 @@
 <body>
 
 
+{* MAIN PAGE NAVIGATION BAR *}
+	<ul class='navbutton'>
+		<li><a href="/cycledata/">Cycle Thefts</a></li>
+		<li><a href="/cycledata/collisions.html">Road Collisions</a></li>
+	</ul><br>
 
-	{$navBar}
 
-	{$locationSearch}
+{* LOCATION SEARCH BAR *}
+	<form action="{$currentUrl}">
+		Search:<br>
+		<input type="text" name="location" placeholder="Search for a location"><br>
+		<input type="submit" value="Search">
+	</form>
 
 
-{* PAGE BAR *}
+{* DATA PAGE NAVIGATION BAR *}
 	<ul class="pageBar">
 		<li><a href="/cycledata/page/{$pagination.previousPage}/"><</a></li>
 	{for $pageNumber = 1 to $pagination.finalPage}

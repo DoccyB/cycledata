@@ -104,15 +104,9 @@ class theftPage
         # Constructs home button and intro text
 	private function topOfPage ($data)
         {
-		# Creates main page navigation bar
-		$navBar  = "<ul class='navbutton'>\n\t\t<li><a href=\"/cycledata/\">Cycle Thefts</a></li>\n\t\t<li><a href=\"/cycledata/collisions.html\">Road Collisions</a></li>\n\t</ul><br>";
-		$this->smarty->assign ('navBar', $navBar);
 
-		# Creates form for searching locations
-		$currentURL = $_SERVER['REQUEST_URI'];
-		$locationSearch  = "<form action=\"{$currentURL}\">\n\t\tSearch:<br>\n\t\t<input type=\"text\" name=\"location\" placeholder=\"Search for a location\"<br><br><input type=\"submit\" value=\"Search\">\n\t</form>";
-		$this->smarty->assign ('locationSearch', $locationSearch);
-
+		$currentUrl = $_SERVER['REQUEST_URI'];
+		$this->smarty->assign ('currentUrl', $currentUrl);
 
 		# Creates form to submit new entries to DB
 		$newEntry = "<form action=\"{$currentURL}\" method=\"post\">\n\t<table id=\"newEntryForm\" style='width:80%'>\n\t<p>Submit a New Entry:</p>\n\t</tr>\n\t";
