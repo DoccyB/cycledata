@@ -25,11 +25,11 @@
 
 {* PAGE BAR *}
 	<ul class="pageBar">
-		<li><a href="/cycledata/?page={$pagination.previousPage}"><</a></li>
+		<li><a href="/cycledata/page/{$pagination.previousPage}/"><</a></li>
 	{for $pageNumber = 1 to $pagination.finalPage}
-		<li><a href="/cycledata/?page={$pageNumber}">{$pageNumber}</a></li>
+		<li><a href="/cycledata/page/{$pageNumber}/">{$pageNumber}</a></li>
         {/for}
-		<li><a href="/cycledata/?page={$pagination.nextPage}">></a></li>
+		<li><a href="/cycledata/page/{$pagination.nextPage}/">></a></li>
 	</ul>
 
 

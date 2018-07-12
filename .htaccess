@@ -1,3 +1,7 @@
 RewriteEngine on
-RewriteBase /cycledata
+RewriteBase /cycledata/
+
 RewriteRule ^([0-9]+)/$ index.html?id=$1 [L]
+
+RewriteRule ^page/([0-9]+)/$ index.html?page=$1 [L]
+
