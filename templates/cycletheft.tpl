@@ -40,7 +40,7 @@
 
 	{$table}
 
-	{$map}
+	<div id="map"></div>
 
 	{$newEntry}
 </body>

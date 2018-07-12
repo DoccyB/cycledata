@@ -35,10 +35,6 @@ class theftPage
 			$table = $htmlClass->makeTable ($result);
 			$this->smarty->assign ('table', $table);
 
-			# div for map
-			$map = "<div id=\"map\"></div>";
-			$this->smarty->assign ('map', $map);
-
 			$this->smarty->display("cycletheft.tpl");
 		}
 	}
