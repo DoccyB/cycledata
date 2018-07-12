@@ -19,15 +19,17 @@ class theftPage
 		require_once ('database.php');
 		$this->database = new database ("cycletheft");
 
+		# Get data
 		$query = $this->getQuery ();
 		$result = $this->database->retrieveData ($query);
 
+		# Only run page if data retrieved
 		if ($result == array()) {
 			echo "No matches for your search";
 		} else {
 			$result = $this->reassignKeys ($result);
 
-			$this->topOfPage ($result);
+			$this->assignSmartyVariables ($result);
 
 			require_once('html.php');
 			$htmlClass = new html;
@@ -102,20 +104,24 @@ class theftPage
 
 
         # Constructs home button and intro text
-	private function topOfPage ($data)
+	private function assignSmartyVariables ($data)
         {
 
+		# Assign current URL
 		$currentUrl = $_SERVER['REQUEST_URI'];
 		$this->smarty->assign ('currentUrl', $currentUrl);
 
-		# array of table headings => heading description
+
+		# Assign array of table headings => heading description
 		$headings = $this->database->getHeadings ("crimes");
 		$this->smarty->assign ('headings', $headings);
 
 
-		# Creates data page navigation bar
+		# Get number of data pages needed
 		$countEntries = $this->database->retrieveOneValue ("SELECT count(*) from crimes");
 		$finalPage = ceil ($countEntries / 10);
+
+		# If page number requested, assign values to current, next, previous page
 		if (isSet ($_GET['page'])) {
 			$currentPage = $_GET['page'];
 		} else {
