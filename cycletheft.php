@@ -108,16 +108,9 @@ class theftPage
 		$currentUrl = $_SERVER['REQUEST_URI'];
 		$this->smarty->assign ('currentUrl', $currentUrl);
 
-		# Creates form to submit new entries to DB
-		$newEntry = "<form action=\"{$currentURL}\" method=\"post\">\n\t<table id=\"newEntryForm\" style='width:80%'>\n\t<p>Submit a New Entry:</p>\n\t</tr>\n\t";
-
-		# Loops through headings and creates input value for form
+		# array of table headings => heading description
 		$headings = $this->database->getHeadings ("crimes");
-         	foreach ($headings as $heading => $comment) {
-			$newEntry .= "<tr>\n\t\t<td>$comment: </td><td><input type=\"text\" name=\"{$heading}\" placeholder=\"{$heading}\"></td>\n\t</tr>\n\t";
-		}
-		$newEntry .= "\n\t</table>\n\t<p><input type=\"submit\" value=\"Submit\"></p>\n\t</form>";
-		$this->smarty->assign ('newEntry', $newEntry);
+		$this->smarty->assign ('headings', $headings);
 
 
 		# Creates data page navigation bar

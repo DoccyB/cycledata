@@ -49,8 +49,22 @@
 
 	{$table}
 
+{* MAP *}
 	<div id="map"></div>
 
-	{$newEntry}
+{* NEW ENTRY *}
+	<form action="{$currentUrl}" method="post">
+	<p>Submit a New Entry:</p>
+	<table id="newEntryForm" style='width:80%'>
+	{foreach $headings as $heading => $comment}
+	<tr>
+		<td>{$comment}: </td>
+		<td><input type="text" name="{$heading}" placeholder="{$heading}"></td>
+	</tr>
+	{/foreach}
+	</table>
+	<p><input type="submit" value="Submit"></p>
+	</form>
+
 </body>
 </html>
