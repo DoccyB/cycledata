@@ -34,11 +34,15 @@
 
 {* DATA PAGE NAVIGATION BAR *}
 	<ul class="pageBar">
+	{if $pagination.currentPage != 1}
 		<li><a href="/cycledata/page/{$pagination.previousPage}/"><</a></li>
+	{/if}
 	{for $pageNumber = 1 to $pagination.finalPage}
 	<li><a href="/cycledata/page/{$pageNumber}/">{$pageNumber}</a></li>
 	{/for}
+	{if $pagination.currentPage != $pagination.finalPage}
 	<li><a href="/cycledata/page/{$pagination.nextPage}/">></a></li>
+	{/if}
 	</ul>
 
 {* PAGE TITLE *}
