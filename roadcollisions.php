@@ -3,23 +3,34 @@ $page = new collisionPage;
 
 class collisionPage
 {
+
+	private $smarty;
+
         # Constructs webpage
         public function __construct ()
         {
+		require_once('libraries/smarty/libs/Smarty.class.php');
+                $this->smarty = new Smarty();
+                $this->smarty->setTemplateDir('templates/');
+                $this->smarty->setCompileDir('/var/www/html/smarty/templates_c/');
+                $this->smarty->setConfigDir('/var/www/html/smarty/configs/');
+                $this->smarty->setCacheDir('/var/www/html/smarty/cache/');
+
                 $query = $this->getQuery ();
 
 	       	include 'database.php';
 		$database = new database ("cycletheft");
 
+
 		$result = $database->retrieveData ($query);
 		$result = $this->reassignKeys ($result);
-		$html = $this->topOfPage ();
 
 		include 'html.php';
                 $htmlClass = new html;
 
+		$html = $htmlClass->makeTable ($result);
 
-		$html .= $htmlClass->makeTable ($result);
+		$this->smarty->display("collisions.tpl");
 		echo $html;
 	}
 
@@ -51,10 +62,6 @@ class collisionPage
 	# Constructs home button and intro text
 	private function topOfPage ()
         {
-                $html  = "<ul class='navbutton'>\n\t\t<li><a href=\"/cycledata/\">Cycle Thefts</a></li>\n\t\t<li><a href=\"/cycledata/collisions.html\">Road Collisions</a></li>\n\t</ul>";
-		$html .= "\n\t<h1>Road Collisions 2018</h1>";
-		$html .= "\n\t<h2 class='introText'>Click \"ID\" for more info or \"Location\" for map link</h2>";
-                return $html;
         }
 
 
