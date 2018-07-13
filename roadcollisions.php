@@ -6,17 +6,11 @@ class collisionPage
 	private $database;
 
         # Constructs webpage
-        public function __construct ()
+        public function __construct ($smarty, $database)
         {
-		require_once('libraries/smarty/libs/Smarty.class.php');
-                $this->smarty = new Smarty();
-                $this->smarty->setTemplateDir('templates/');
-                $this->smarty->setCompileDir('/var/www/html/smarty/templates_c/');
-                $this->smarty->setConfigDir('/var/www/html/smarty/configs/');
-                $this->smarty->setCacheDir('/var/www/html/smarty/cache/');
-
-		require_once ('database.php');
-		$this->database = new database ("cycletheft");
+		# Assign libraries to class variables
+                $this->smarty = $smarty;
+		$this->database = $database;
 
 		# Get data
                 $query = $this->getQuery ();
