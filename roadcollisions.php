@@ -3,9 +3,9 @@
 $page = new collisionPage;
 class collisionPage
 {
-
 	private $smarty;
 	private $database;
+
         # Constructs webpage
         public function __construct ()
         {
@@ -53,7 +53,8 @@ class collisionPage
                         }
 	                $id = $_GET['id'];
 		}
- 
+
+
 		# Assemble the query
 		if ($id == FALSE) {
                 	$query  = "select id, longitude, latitude, severity, vehiclesInvolved, casualties FROM collisions LIMIT 9300, 300";
@@ -64,9 +65,40 @@ class collisionPage
 	}
 
 
-	# Constructs home button and intro text
-	private function topOfPage ()
-        {
+	private function assignSmartyVariables ($data)
+	{
+
+            # Assign current URL
+            $currentUrl = $_SERVER['REQUEST_URI'];
+            $this->smarty->assign ('currentUrl', $currentUrl);
+
+
+            # Assign array of table headings => heading description
+            $headings = $this->database->getHeadings ("collisions");
+            $this->smarty->assign ('headings', $headings);
+
+
+            # Get number of data pages needed
+            $countEntries = $this->database->retrieveOneValue ("SELECT count(*) from collisions");
+            $finalPage = ceil ($countEntries / 10);
+
+            # If page number requested, assign values to current, next, previous page
+            if (isSet ($_GET['page'])) {
+                    $currentPage = $_GET['page'];
+            } else {
+                    $currentPage = 1;
+            }
+            $previousPage = $currentPage - 1;
+            $nextPage = $currentPage + 1;
+
+            $pagination = array (
+                    'currentPage' => $currentPage,
+                    'finalPage' => $finalPage,
+                    'nextPage' => $nextPage,
+                    'previousPage' => $previousPage,
+            );
+            $this->smarty->assign ('pagination', $pagination);
+
         }
 
 
