@@ -24,11 +24,26 @@
 {* PAGE INTRO *}
         <h2 class='introText'>Click "ID" for more info or "Location" for a map link</h2>
 
+
+{* DATA PAGE NAVIGATION BAR *}
+	<ul class="pageBar">
+	{if $pagination.currentPage != 1}
+		<li><a href="/cycledata/collisions/page/{$pagination.previousPage}/"><</a></li>
+	{/if}
+	{for $pageNumber = 1 to $pagination.finalPage}
+	<li><a href="/cycledata/collisions/page/{$pageNumber}/">{$pageNumber}</a></li>
+	{/for}
+	{if $pagination.currentPage != $pagination.finalPage}
+	<li><a href="/cycledata/collisions/page/{$pagination.nextPage}/">></a></li>
+	{/if}
+	</ul>
+
+
+{* DATA TABLE *}
+	{$table}
+
 {* MAP *}
 	<div id="map"></div>
-
-{* TABLE *}
-	{$table}
 
 </body>
 </html>

@@ -22,7 +22,9 @@ class collisionPage
                 } else {
                         $result = $this->reassignKeys ($result);
 
-                        require_once('html.php');
+			$this->assignSmartyVariables ($result);
+
+                        require_once ('html.php');
                         $htmlClass = new html;
 
 			$table = $htmlClass->makeTable ($result);
@@ -47,13 +49,31 @@ class collisionPage
 	                $id = $_GET['id'];
 		}
 
+                # Get the page number
+                $page = false;
+                if (isSet ($_GET['page'])) {
+                        if(!ctype_digit ($_GET['page'])) {
+                                echo  "Page number must be a NUMBER!";
+                                die;
+                        }
+                        $page = $_GET['page'];
+                }
+
 
 		# Assemble the query
 		if ($id == FALSE) {
                 	$query  = "select id, longitude, latitude, severity, vehiclesInvolved, casualties FROM collisions LIMIT 9300, 300";
                 } else {
-                      $query  = "select * from collisions WHERE id = '{$id}'";
-               }
+			$query  = "select * from collisions WHERE id = '{$id}'";
+                }
+
+		# If page number, select relevant results
+                $pageOffset = $page * 10 - 10;
+                if ($page) {
+			$query  = "select id, severity, vehiclesInvolved, casualties, longitude, latitude from collisions LIMIT 10 OFFSET {$pageOffset}";
+                }
+
+
 		return $query;
 	}
 
