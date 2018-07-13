@@ -1,6 +1,5 @@
 <?php
 
-$page = new collisionPage;
 class collisionPage
 {
 	private $smarty;

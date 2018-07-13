@@ -1,6 +1,5 @@
 <?php
 
-$page = new theftPage;
 class theftPage
 {
 	private $smarty;
