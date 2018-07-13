@@ -1,11 +1,11 @@
 <?php
-$page = new collisionPage;
 
+$page = new collisionPage;
 class collisionPage
 {
 
 	private $smarty;
-
+	private $database;
         # Constructs webpage
         public function __construct ()
         {
@@ -16,22 +16,27 @@ class collisionPage
                 $this->smarty->setConfigDir('/var/www/html/smarty/configs/');
                 $this->smarty->setCacheDir('/var/www/html/smarty/cache/');
 
+		require_once ('database.php');
+		$this->database = new database ("cycletheft");
+
+		# Get data
                 $query = $this->getQuery ();
+		$result = $this->database->retrieveData ($query);
 
-	       	include 'database.php';
-		$database = new database ("cycletheft");
+                # Only run page if data retrieved
+                if ($result == array()) {
+                        echo "No matches for your search";
+                } else {
+                        $result = $this->reassignKeys ($result);
 
+                        require_once('html.php');
+                        $htmlClass = new html;
 
-		$result = $database->retrieveData ($query);
-		$result = $this->reassignKeys ($result);
+			$table = $htmlClass->makeTable ($result);
+			$this->smarty->assign('table', $table);
 
-		include 'html.php';
-                $htmlClass = new html;
-
-		$html = $htmlClass->makeTable ($result);
-
-		$this->smarty->display("collisions.tpl");
-		echo $html;
+			$this->smarty->display("collisions.tpl");
+                }
 	}
 
 
