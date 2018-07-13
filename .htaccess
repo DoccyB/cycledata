@@ -7,6 +7,6 @@ RewriteRule ^page/([0-9]+)/$ index.html?module=cycletheft&page=$1 [L]
 
 RewriteRule ^api/$ API.php [L,QSA]
 
-
 RewriteRule ^collisions/$ index.html?module=collisions
 
+RewriteRule ^cycletheft/$ index.html?module=cycletheft

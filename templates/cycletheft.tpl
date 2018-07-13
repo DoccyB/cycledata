@@ -12,15 +12,15 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/cycledata/map.js"></script>
 	<link href="/cycledata/style.css" rel="stylesheet" type = "text/css"/>
-	{literal}<style type="text/css">#map {width: 50%; height: 400px;}</style>{/literal}
+	{literal}<style type="text/css">#map {width: 100%; height: 400px;}</style>{/literal}
 </head>
 <body>
 
 
 {* MAIN PAGE NAVIGATION BAR *}
 	<ul class='navbutton'>
-		<li><a href="/cycledata/">Cycle Thefts</a></li>
-		<li><a href="/cycledata/collisions.html">Road Collisions</a></li>
+		<li><a href="/cycledata/cycletheft/">Cycle Thefts</a></li>
+		<li><a href="/cycledata/collisions/">Road Collisions</a></li>
 	</ul><br>
 
 
