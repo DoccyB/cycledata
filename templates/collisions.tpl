@@ -24,7 +24,11 @@
 {* PAGE INTRO *}
         <h2 class='introText'>Click "ID" for more info or "Location" for a map link</h2>
 
+{* MAP *}
+	<div id="map"></div>
 
+{* TABLE *}
+	{$table}
 
 </body>
 </html>
