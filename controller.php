@@ -24,11 +24,11 @@ class controller
                 }
 
 		# Open web page based on query
-		if ($module == "cycletheft") {
-			require_once ("cycletheft.php");
+		if ($module == "thefts") {
+			require_once ("thefts.php");
 			new theftPage ($smarty, $database);
 		} elseif ($module == "collisions") {
-			require_once ("roadcollisions.php");
+			require_once ("collisions.php");
 			new collisionPage ($smarty, $database);
 		}
 

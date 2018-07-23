@@ -1,9 +1,9 @@
 RewriteEngine on
 RewriteBase /cycledata/
 
-RewriteRule ^([0-9]+)/$ index.html?module=cycletheft&id=$1 [L]
+RewriteRule ^([0-9]+)/$ index.html?module=thefts&id=$1 [L]
 
-RewriteRule ^page/([0-9]+)/$ index.html?module=cycletheft&page=$1 [L]
+RewriteRule ^page/([0-9]+)/$ index.html?module=thefts&page=$1 [L]
 
 RewriteRule ^collisions/page/([0-9]+)/$ index.html?module=collisions&page=$1 [L]
 
@@ -11,5 +11,5 @@ RewriteRule ^api/$ API.php [L,QSA]
 
 RewriteRule ^collisions/$ index.html?module=collisions
 
-RewriteRule ^cycletheft/$ index.html?module=cycletheft
+RewriteRule ^thefts/$ index.html?module=thefts
 
