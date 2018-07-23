@@ -28,19 +28,18 @@ class collisionPage
                         $htmlClass = new html;
 
 			$table = $htmlClass->makeTable ($result);
-			$this->smarty->assign('table', $table);
+			$this->smarty->assign ('table', $table);
 
-			$this->smarty->display("collisions.tpl");
+			$this->smarty->display ("collisions.tpl");
                 }
 	}
 
 
 	private function getQuery ()
         {
-		# Get the ID
-                $id = false;
 
-		# Checks for a requested item number, and if so, validates and assigns this
+		# Gets ID, checks for a requested item number, and if so, validates and assigns this
+                $id = false;
 		if (isSet ($_GET['id'])) {
 			if( !preg_match ('/^[0-9]{6}[-0-9A-Za-z]{2}[0-9]{5}$/', $_GET['id'])) {
 				echo "Invalid ID";
