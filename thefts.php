@@ -1,6 +1,6 @@
 <?php
 
-class theftPage
+class thefts
 {
 	private $smarty;
 	private $database;

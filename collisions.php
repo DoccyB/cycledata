@@ -1,6 +1,6 @@
 <?php
 
-class collisionPage
+class collisions
 {
 	private $smarty;
 	private $database;
