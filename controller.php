@@ -17,10 +17,6 @@ class controller
 		require_once ("database.php");
 		$database = new database ("cycletheft");
 
-		# Get web pages
-		require_once ("cycletheft.php");
-		require_once ("roadcollisions.php");
-
 		# Get module query
 		$module = false;
                 if (isSet ($_GET['module'])) {
@@ -29,8 +25,10 @@ class controller
 
 		# Open web page based on query
 		if ($module == "cycletheft") {
+			require_once ("cycletheft.php");
 			new theftPage ($smarty, $database);
 		} elseif ($module == "collisions") {
+			require_once ("roadcollisions.php");
 			new collisionPage ($smarty, $database);
 		}
 
