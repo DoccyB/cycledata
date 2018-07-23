@@ -1,7 +1,4 @@
-{* Smarty *}
-
-
-<html>	
+<html>
 <head>
 	<title>CycleThefts</title>
 
@@ -19,7 +16,7 @@
 
 {* MAIN PAGE NAVIGATION BAR *}
 	<ul class='navbutton'>
-		<li><a href="/cycledata/cycletheft/">Cycle Thefts</a></li>
+		<li><a href="/cycledata/thefts/">Cycle Theft</a></li>
 		<li><a href="/cycledata/collisions/">Road Collisions</a></li>
 	</ul><br>
 
@@ -31,6 +28,12 @@
 		<input type="submit" value="Go!">
 	</form>
 
+
+{* PAGE TITLE *}
+	<h1>Cycle Thefts In Cambridge</h1>
+
+{* PAGE INTRO *}
+	<h2 class='introText'>Click "ID" for more info or "Location" for a map link</h2>
 
 {* DATA PAGE NAVIGATION BAR *}
 	<ul class="pageBar">
@@ -44,12 +47,6 @@
 	<li><a href="/cycledata/page/{$pagination.nextPage}/">></a></li>
 	{/if}
 	</ul>
-
-{* PAGE TITLE *}
-	<h1>Cycle Thefts In Cambridge</h1>
-
-{* PAGE INTRO *}
-	<h2 class='introText'>Click "ID" for more info or "Location" for a map link</h2>
 
 {* DATA TABLE *}
 	{$table}

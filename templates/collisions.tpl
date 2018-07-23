@@ -14,7 +14,7 @@
 <body>
 {* MAIN PAGE NAVIGATION BAR *}
         <ul class='navbutton'>
-                <li><a href="/cycledata/cycletheft/">Cycle Theft</a></li>
+                <li><a href="/cycledata/thefts/">Cycle Theft</a></li>
                 <li><a href="/cycledata/collisions/">Road Collisions</a></li>
         </ul><br>
 
