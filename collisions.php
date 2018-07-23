@@ -117,7 +117,7 @@ class collisions
 	private function reassignKeys ($collisionData)
         {
 		foreach ($collisionData as $index => $row) {
-			$row['id'] = "<a href=\"/cycledata/collisions.html?id={$row['id']}\">{$row['id']}</a>";
+			$row['id'] = "<a href=\"/cycledata/collisions/{$row['id']}/\">{$row['id']}</a>";
 			$row['location'] = "\n\t\t<a href=\"https:/\/www.openstreetmap.org/#map=18/{$row['latitude']}/{$row['longitude']}\" target=\"_blank\">Location</a>";
 			$collisionData[$index] = $row;
                 }
