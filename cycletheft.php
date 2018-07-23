@@ -24,13 +24,13 @@ class theftPage
 
 			$this->assignSmartyVariables ($result);
 
-			require_once('html.php');
+			require_once ('html.php');
 			$htmlClass = new html;
 
 			$table = $htmlClass->makeTable ($result);
 			$this->smarty->assign ('table', $table);
 
-			$this->smarty->display("cycletheft.tpl");
+			$this->smarty->display ("cycletheft.tpl");
 		}
 	}
 
@@ -38,7 +38,7 @@ class theftPage
 	private function getQuery ()
 	{
 
-		# Gets ID, Checks for a requested item number, and if so, validates and assigns this
+		# Gets ID, checks for a requested item number, and if so, validates and assigns this
 		$id = false;
 		if (isSet ($_GET['id'])) {
 			if(!ctype_digit ($_GET['id'])) {
@@ -96,7 +96,6 @@ class theftPage
 	}
 
 
-        # Constructs home button and intro text
 	private function assignSmartyVariables ($data)
         {
 
