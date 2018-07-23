@@ -13,8 +13,7 @@ class thefts
 		$this->database = $database;
 
 		# Get data
-		$query = $this->getQuery ();
-		$result = $this->database->retrieveData ($query);
+		$result = $this->getData ();
 
 		# Only run page if data retrieved
 		if ($result == array()) {
@@ -35,8 +34,15 @@ class thefts
 	}
 
 
-	private function getQuery ()
+	private function getData ()
 	{
+
+		# Create instance of thefts model
+		require_once ("theftsmodel.php");
+		$theftsModel = new theftsModel ($this->database);
+
+		# Select everything by default
+		$result = $theftsModel->main ();
 
 		# Gets ID, checks for a requested item number, and if so, validates and assigns this
 		$id = false;
@@ -46,6 +52,7 @@ class thefts
 				die;
 			}
 			$id = $_GET['id'];
+			$result = $theftsModel->id ($id);
 		}
 
 		# Get the Location
@@ -56,6 +63,7 @@ class thefts
 				die;
 			}
 			$location = $_GET['location'];
+			$result = $theftsModel->location ($location);
 		}
 
 		# Get the page number
@@ -66,6 +74,7 @@ class thefts
 				die;
 			}
 			$page = $_GET['page'];
+			$result = $theftsModel->page ($page);
 		}
 
 		# Execute form submitted for new entry
@@ -73,26 +82,7 @@ class thefts
 			$this->database->newRow("crimes", $_POST);
 		}
 
-		# Select everything by default
-		$query  = "select id, latitude, longitude, location, status from crimes LIMIT 10";
-
-		# If Id, select one result
-		if ($id) {
-			$query  = "select * from crimes WHERE id = '{$id}'";
-		}
-
-		# If search, select relevant results or display error message
-		if ($location) {
-			$query  = "select * from crimes WHERE location LIKE '%{$location}%'";
-		}
-
-		# If page number, select relevant results
-		$pageOffset = $page * 10 - 10;
-		if ($page) {
-			$query  = "select id, latitude, longitude, location, status from crimes LIMIT 10 OFFSET {$pageOffset}";
-		}
-
-		return $query;
+		return $result;
 	}
 
 
