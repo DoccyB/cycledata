@@ -123,6 +123,7 @@ class theftPage
 		$nextPage = $currentPage + 1;
 
 		$pagination = array (
+			'currentPage' => $currentPage,
 			'finalPage' => $finalPage,
 			'nextPage' => $nextPage,
 			'previousPage' => $previousPage,
