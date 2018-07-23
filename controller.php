@@ -3,6 +3,9 @@
 $controller = new controller;
 class controller
 {
+
+	private $modules = array("thefts", "collisions");
+
 	public function __construct ()
 	{
 		# Create an instance of Smarty
@@ -23,14 +26,14 @@ class controller
                         $module = $_GET['module'];
                 }
 
-		# Open web page based on query
-		if ($module == "thefts") {
-			require_once ("thefts.php");
-			new thefts ($smarty, $database);
-		} elseif ($module == "collisions") {
-			require_once ("collisions.php");
-			new collisions ($smarty, $database);
+		if (!in_array($module, $this->modules, true)) {
+			echo "There is no page called {$module}";
+			die;
 		}
+
+		# Open web page based on query
+		require_once ("{$module}.php");
+		new $module ($smarty, $database);
 
 	}
 }
