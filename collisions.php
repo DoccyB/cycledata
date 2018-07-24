@@ -13,8 +13,7 @@ class collisions
 		$this->database = $database;
 
 		# Get data
-                $query = $this->getQuery ();
-		$result = $this->database->retrieveData ($query);
+		$result = $this->getData ();
 
                 # Only run page if data retrieved
                 if ($result == array()) {
@@ -35,8 +34,15 @@ class collisions
 	}
 
 
-	private function getQuery ()
+	private function getData ()
         {
+
+                # Create instance of collisions model
+                require_once ("collisionsmodel.php");
+                $collisionsModel = new collisionsModel ($this->database);
+
+                # Select everything by default
+                $result = $collisionsModel->main ();
 
 		# Gets ID, checks for a requested item number, and if so, validates and assigns this
                 $id = false;
@@ -46,6 +52,7 @@ class collisions
                         	die;
                         }
 	                $id = $_GET['id'];
+			$result = $collisionsModel->id ($id);
 		}
 
                 # Get the page number
@@ -56,24 +63,10 @@ class collisions
                                 die;
                         }
                         $page = $_GET['page'];
+			$result = $collisionsModel->page ($page);
                 }
 
-
-		# Assemble the query
-		if ($id == FALSE) {
-                	$query  = "select id, longitude, latitude, severity, vehiclesInvolved, casualties FROM collisions LIMIT 9300, 300";
-                } else {
-			$query  = "select * from collisions WHERE id = '{$id}'";
-                }
-
-		# If page number, select relevant results
-                $pageOffset = $page * 10 - 10;
-                if ($page) {
-			$query  = "select id, severity, vehiclesInvolved, casualties, longitude, latitude from collisions LIMIT 10 OFFSET {$pageOffset}";
-                }
-
-
-		return $query;
+		return $result;
 	}
 
 
