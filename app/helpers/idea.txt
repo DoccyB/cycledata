@@ -1,0 +1,31 @@
+
+
+
+$supportedApiFields = array (
+	'limit' => array (
+		'type' => 'int',
+		'default' => 10,
+	'	'description' => 'Limit the number of results.
+	).
+	'match' => array (
+		type => 'string'.
+		.. => ...	
+
+);
+
+
+
+Foreach ($supportedApiFields as $field => $attributes) {
+		
+		$function = 'parse' . Ucfirst ($attributes['type']);		// parseInt, parseString
+
+		# Support optional tag matching, for autocomplete
+			${$field} = apiV2->$function ($field, $attributes['default'], $error);
+			if ($error) {
+				return array ('error' => $error);
+			}
+
+}
+
+
+
