@@ -32,7 +32,7 @@ class controller
 		}
 
 		# Open web page based on query
-		require_once ("{$module}.php");
+		require_once ("app/controllers/{$module}.php");
 		new $module ($smarty, $database);
 
 	}
