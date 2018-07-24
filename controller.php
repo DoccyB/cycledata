@@ -17,7 +17,7 @@ class controller
 		$smarty->setCacheDir('/var/www/html/smarty/cache/');
 
 		# Create an instance of database class
-		require_once ("database.php");
+		require_once ("app/helpers/database.php");
 		$database = new database ("cycletheft");
 
 		# Get module query
