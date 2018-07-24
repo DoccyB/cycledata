@@ -63,19 +63,6 @@ class database
 
 	public function newRow ($table, $values)
 	{
-/*
-		$stmt = $this->pdo->prepare("INSERT INTO {$table} (heading, value) VALUES (:heading, :value)");
-		foreach($values as $heading => $value) {
-			$stmt->bindparam('heading', $h);
-			$stmt->bindparam('value', $v);
-
-			$h = $heading;
-			$v = $value;
-			$stmt->execute();
-		}
-*/
-
-
 		foreach ($values as $key => $value) {
 			$values[$key] = str_replace ("'", "\'", $value);
 		}
@@ -92,7 +79,6 @@ class database
 		$this->pdo->query ($query);
 
 	}
-
 }
 
 ?>
