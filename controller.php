@@ -11,7 +11,7 @@ class controller
 		# Create an instance of Smarty
 		require_once ('libraries/smarty/libs/Smarty.class.php');
 		$smarty = new Smarty();
-		$smarty->setTemplateDir('templates/');
+		$smarty->setTemplateDir('app/views/');
 		$smarty->setCompileDir('/var/www/html/smarty/templates_c/');
 		$smarty->setConfigDir('/var/www/html/smarty/configs/');
 		$smarty->setCacheDir('/var/www/html/smarty/cache/');
