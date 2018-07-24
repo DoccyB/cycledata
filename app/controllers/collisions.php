@@ -23,7 +23,7 @@ class collisions
 
 			$this->assignSmartyVariables ($result);
 
-                        require_once ('html.php');
+                        require_once ('app/helpers/html.php');
                         $htmlClass = new html;
 
 			$table = $htmlClass->makeTable ($result);
