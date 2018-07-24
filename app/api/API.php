@@ -8,7 +8,7 @@ class API
 	{
 		# retrieve data
 		$query = $this->bboxQuery ();
-		include 'database.php';
+		include '/var/www/html/cycledata/database.php';
 		$database = new database ("cycletheft");
 
 		$data = $database->retrieveData ($query);
