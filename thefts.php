@@ -38,7 +38,7 @@ class thefts
 	{
 
 		# Create instance of thefts model
-		require_once ("theftsmodel.php");
+		require_once ("app/models/theftsmodel.php");
 		$theftsModel = new theftsModel ($this->database);
 
 		# Select everything by default

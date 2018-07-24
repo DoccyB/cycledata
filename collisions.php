@@ -38,7 +38,7 @@ class collisions
         {
 
                 # Create instance of collisions model
-                require_once ("collisionsmodel.php");
+                require_once ("app/models/collisionsmodel.php");
                 $collisionsModel = new collisionsModel ($this->database);
 
                 # Select everything by default
