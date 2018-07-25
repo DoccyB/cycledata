@@ -32,10 +32,6 @@ h1 {
 	background-color: #111;
 }
 
-#newEntryForm {
-
-}
-
 .introText {
 	font-weight: bold;
 	text-align: center;
@@ -48,6 +44,10 @@ table {
 	border-collapse: collapse;
 	text-align: center;
 	margin: 0 auto;
+	
+}
+
+#newEntryForm {
 	
 }
 
@@ -76,13 +76,15 @@ a {
 
 .pageBar {
 	list-style-type: none;
+	text-align: center;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
+	margin: 0 auto;
 }
 
 .pageBar li a {
-	display: block;
+	display: inline-block;
 	color: white;
 	text-align: center;
 	float: left;
