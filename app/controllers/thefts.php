@@ -46,6 +46,19 @@ class thefts
 		return $result;
 	}
 
+	private function validateChars ($field, &$error = false)
+	{
+		$result = false;
+		if (isSet ($_GET[$field])) {
+			if (!preg_match ('/^[a-z A-Z]{1,40}$/', $_GET[$field])) {
+				$error = "{$field} must consist of letters only";
+				return false;
+			}
+			$result = $_GET[$field];
+		}
+		return $result;
+	}
+
 
 	private function getData ()
 	{
@@ -81,15 +94,14 @@ class thefts
 			$result = $theftsModel->page ($page);
 		}
 
+		# Gets location, validates it in validateChars function, pulls data in thefts model
+		$location = $this->validateChars ("location", $error);
+		if ($error) {
+			echo $error;
+			die;
+		}
 
-		# Get the Location
-		$location = false;
-		if (isSet ($_GET['location'])) {
-			if (!preg_match ('/^[a-z A-Z]{1,40}$/', $_GET['location'])) {
-				echo "Use letters only for location search";
-				die;
-			}
-			$location = $_GET['location'];
+		if ($location) {
 			$result = $theftsModel->location ($location);
 		}
 
