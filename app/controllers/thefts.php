@@ -48,28 +48,20 @@ class thefts
 		require_once ("app/helpers/apihelper.php");
 		$apiHelper = new apiHelper;
 
-		# Gets theft ID, validates it in validateNumeric function, pulls data in thefts model
-		$theft = $apiHelper->validate ("theft", "validateNumeric");
+		# Array of get values and validation style
+		$getVals = array (
+			"theft"    => "validateNumeric",
+			"page"     => "validateNumeric",
+			"location" => "validateChars",
+		);
 
-		if ($theft) {
-			$result = $theftsModel->theft ($theft);
+		# Loops through get values, validates them, and pulls data from model
+		foreach ($getVals as $field => $validation) {
+			$get = $apiHelper->validate ($field, $validation);
+			if ($get) {
+				$result = $theftsModel->$field ($get);
+			}
 		}
-
-
-		# Gets page, validates it in validateNumeric function, pulls data in thefts model
-		$page = $apiHelper->validate ("page", "validateNumeric");
-
-		if ($page) {
-			$result = $theftsModel->page ($page);
-		}
-
-		# Gets location, validates it in validateChars function, pulls data in thefts model
-		$location = $apiHelper->validate ("location", "validateChars");
-
-		if ($location) {
-			$result = $theftsModel->location ($location);
-		}
-
 
 		# Execute form submitted for new entry
 		if ($_POST) {
