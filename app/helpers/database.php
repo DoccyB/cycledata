@@ -1,14 +1,12 @@
 <?php
-
 # Class which handles database interactions
 class database
 {
 	private $pdo;
 
-	public function __construct ($dbName)
+	public function __construct ($dbName, $password)
 	{
 		# connect to DB
-		include '.config.php';
 		$this->pdo = new PDO ("mysql:host=localhost;dbname={$dbName}", "root", $password);
 
 	}
