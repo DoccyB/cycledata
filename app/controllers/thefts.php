@@ -33,6 +33,18 @@ class thefts
 		}
 	}
 
+	private function validateNumeric ($field)
+	{
+		$result = false;
+		if (isSet ($_GET[$field])) {
+			if(!ctype_digit ($_GET[$field])) {
+				return false;
+			}
+			$result = $_GET[$field];
+		}
+		return $result;
+	}
+
 
 	private function getData ()
 	{
@@ -44,15 +56,17 @@ class thefts
 		# Select everything by default
 		$result = $theftsModel->main ();
 
-		# Gets ID, checks for a requested item number, and if so, validates and assigns this
-		$theft = false;
-		if (isSet ($_GET['theft'])) {
-			if(!ctype_digit ($_GET['theft'])) {
-				echo "Invalid ID";
-				die;
-			}
-			$theft = $_GET['theft'];
+
+		# Gets theft ID, validates it in validateNumeric function, pulls data in thefts model
+		$theft = $this->validateNumeric ("theft");
+		if ($theft) {
 			$result = $theftsModel->theft ($theft);
+		}
+
+		# Gets page, validates it in validateNumeric function, pulls data in thefts model
+		$page = $this->validateNumeric ("page");
+		if ($page) {
+			$result = $theftsModel->page ($page);
 		}
 
 		# Get the Location
@@ -66,16 +80,6 @@ class thefts
 			$result = $theftsModel->location ($location);
 		}
 
-		# Get the page number
-		$page = false;
-		if (isSet ($_GET['page'])) {
-			if(!ctype_digit ($_GET['page'])) {
-				echo  "Page number must be a NUMBER!";
-				die;
-			}
-			$page = $_GET['page'];
-			$result = $theftsModel->page ($page);
-		}
 
 		# Execute form submitted for new entry
 		if ($_POST) {
