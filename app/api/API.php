@@ -1,7 +1,6 @@
 <?php
 
 $API = new API;
-
 class API
 {
 	public function __construct ()
@@ -10,7 +9,7 @@ class API
 		# retrieve data
 		$query = $this->bboxQuery ();
 		require_once ('../helpers/database.php');
-		$database = new database ("cycletheft", $password);
+		$database = new database ("cycletheft", $config["host"], $config["user"], $config["password"]);
 		$data = $database->retrieveData ($query);
 		$this->convertJson ($data);
 	}
