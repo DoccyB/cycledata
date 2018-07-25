@@ -8,6 +8,9 @@ class controller
 
 	public function __construct ()
 	{
+		# Load config file
+		require_once (".config.php");
+
 		# Create an instance of Smarty
 		require_once ('libraries/smarty/libs/Smarty.class.php');
 		$smarty = new Smarty();
@@ -17,8 +20,8 @@ class controller
 		$smarty->setCacheDir('/var/www/html/smarty/cache/');
 
 		# Create an instance of database class
-		require_once ("database.php");
-		$database = new database ("cycletheft");
+		require_once ("app/helpers/database.php");
+		$database = new database ("cycletheft", $password);
 
 		# Get module query
 		$module = false;
