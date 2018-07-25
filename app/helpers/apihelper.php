@@ -3,7 +3,18 @@ class apiHelper
 {
 //	private getFields = array("theft", "collision", "page", "search");
 
-        public function validateNumeric ($field, &$error = false)
+        # Validates Get 
+        public function validate ($field, $eval)
+        {
+                $result = $this->$eval ($field, $error);
+                if ($error) {
+                        echo $error;
+                        die;
+                }
+                return $result;
+        }
+
+        private function validateNumeric ($field, &$error = false)
         {
                 $result = false;
                 if (isSet ($_GET[$field])) {
@@ -17,7 +28,7 @@ class apiHelper
         }
 
 
-        public function validateChars ($field, &$error = false)
+        private function validateChars ($field, &$error = false)
         {
                 $result = false;
                 if (isSet ($_GET[$field])) {
