@@ -33,6 +33,21 @@ class thefts
 		}
 	}
 
+	# Validates Get
+	private function validate ($field, $eval)
+	{
+		# Create instance of APIhelper
+		require_once ("app/helpers/apihelper.php");
+		$apiHelper = new apiHelper;
+
+		$result = $apiHelper->$eval ($field, $error);
+		if ($error) {
+			echo $error;
+			die;
+		}
+		return $result;
+	}
+
 
 	private function getData ()
 	{
@@ -49,11 +64,7 @@ class thefts
 		$apiHelper = new apiHelper;
 
 		# Gets theft ID, validates it in validateNumeric function, pulls data in thefts model
-		$theft = $apiHelper->validateNumeric ("theft", $error);
-		if ($error) {
-			echo $error;
-			die;
-		}
+		$theft = $this->validate ("theft", "validateNumeric");
 
 		if ($theft) {
 			$result = $theftsModel->theft ($theft);
@@ -61,22 +72,14 @@ class thefts
 
 
 		# Gets page, validates it in validateNumeric function, pulls data in thefts model
-		$page = $apiHelper->validateNumeric ("page", $error);
-		if ($error) {
-			echo $error;
-			die;
-		}
+		$page = $this->validate ("page", "validateNumeric");
 
 		if ($page) {
 			$result = $theftsModel->page ($page);
 		}
 
 		# Gets location, validates it in validateChars function, pulls data in thefts model
-		$location = $apiHelper->validateChars ("location", $error);
-		if ($error) {
-			echo $error;
-			die;
-		}
+		$location = $this->validate ("location", "validateChars");
 
 		if ($location) {
 			$result = $theftsModel->location ($location);
