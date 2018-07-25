@@ -13,5 +13,5 @@ RewriteRule ^api/$ app/api/API.php [L,QSA]
 
 RewriteRule ^collisions/$ index.html?module=collisions
 
-RewriteRule ^thefts/$ index.html?module=thefts
+RewriteRule ^thefts/$ index.html?module=thefts [L,QSA]
 
