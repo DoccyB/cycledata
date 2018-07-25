@@ -33,11 +33,12 @@ class thefts
 		}
 	}
 
-	private function validateNumeric ($field)
+	private function validateNumeric ($field, &$error = false)
 	{
 		$result = false;
 		if (isSet ($_GET[$field])) {
 			if(!ctype_digit ($_GET[$field])) {
+				$error = "{$field} must be a number";
 				return false;
 			}
 			$result = $_GET[$field];
@@ -58,16 +59,28 @@ class thefts
 
 
 		# Gets theft ID, validates it in validateNumeric function, pulls data in thefts model
-		$theft = $this->validateNumeric ("theft");
+		$theft = $this->validateNumeric ("theft", $error);
+		if ($error) {
+			echo $error;
+			die;
+		}
+
 		if ($theft) {
 			$result = $theftsModel->theft ($theft);
 		}
 
+
 		# Gets page, validates it in validateNumeric function, pulls data in thefts model
-		$page = $this->validateNumeric ("page");
+		$page = $this->validateNumeric ("page", $error);
+		if ($error) {
+			echo $error;
+			die;
+		}
+
 		if ($page) {
 			$result = $theftsModel->page ($page);
 		}
+
 
 		# Get the Location
 		$location = false;
