@@ -4,10 +4,10 @@ class database
 {
 	private $pdo;
 
-	public function __construct ($dbName, $password)
+	public function __construct ($dbName, $host, $user, $password)
 	{
 		# connect to DB
-		$this->pdo = new PDO ("mysql:host=localhost;dbname={$dbName}", "root", $password);
+		$this->pdo = new PDO ("mysql:host={$host};dbname={$dbName}", $user, $password);
 
 	}
 

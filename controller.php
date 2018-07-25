@@ -1,16 +1,12 @@
 <?php
 
-$controller = new controller;
 class controller
 {
 
 	private $modules = array("thefts", "collisions");
 
-	public function __construct ()
+	public function __construct ($config)
 	{
-		# Load config file
-		require_once (".config.php");
-
 		# Create an instance of Smarty
 		require_once ('libraries/smarty/libs/Smarty.class.php');
 		$smarty = new Smarty();
@@ -21,7 +17,7 @@ class controller
 
 		# Create an instance of database class
 		require_once ("app/helpers/database.php");
-		$database = new database ("cycletheft", $password);
+		$database = new database ("cycletheft", $config["host"], $config["user"], $config["password"]);
 
 		# Get module query
 		$module = false;
