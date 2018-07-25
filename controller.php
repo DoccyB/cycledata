@@ -21,9 +21,10 @@ class controller
 
 		# Get module query
 		$module = false;
-                if (isSet ($_GET['module'])) {
-                        $module = $_GET['module'];
-                }
+		if (isSet ($_GET['module'])) {
+			$module = $_GET['module'];
+		}
+
 
 		if (!in_array($module, $this->modules, true)) {
 			echo "There is no page called {$module}";
