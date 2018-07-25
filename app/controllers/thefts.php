@@ -45,14 +45,14 @@ class thefts
 		$result = $theftsModel->main ();
 
 		# Gets ID, checks for a requested item number, and if so, validates and assigns this
-		$id = false;
-		if (isSet ($_GET['id'])) {
-			if(!ctype_digit ($_GET['id'])) {
+		$theft = false;
+		if (isSet ($_GET['theft'])) {
+			if(!ctype_digit ($_GET['theft'])) {
 				echo "Invalid ID";
 				die;
 			}
-			$id = $_GET['id'];
-			$result = $theftsModel->id ($id);
+			$theft = $_GET['theft'];
+			$result = $theftsModel->theft ($theft);
 		}
 
 		# Get the Location

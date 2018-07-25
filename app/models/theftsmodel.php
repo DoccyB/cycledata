@@ -17,9 +17,9 @@ class theftsModel
 	}
 
 
-	public function id ($id)
+	public function theft ($theft)
 	{
-        	$query  = "select * from crimes WHERE id = '{$id}'";
+		$query  = "select * from crimes WHERE id = '{$theft}'";
 		$result = $this->database->retrieveData($query);
 		return $result;
 	}

@@ -1,7 +1,7 @@
 RewriteEngine on
 RewriteBase /cycledata/
 
-RewriteRule ^([0-9]+)/$ index.html?module=thefts&id=$1 [L]
+RewriteRule ^([0-9]+)/$ index.html?module=thefts&theft=$1 [L]
 
 RewriteRule ^page/([0-9]+)/$ index.html?module=thefts&page=$1 [L]
 
