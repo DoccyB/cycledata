@@ -33,32 +33,6 @@ class thefts
 		}
 	}
 
-	private function validateNumeric ($field, &$error = false)
-	{
-		$result = false;
-		if (isSet ($_GET[$field])) {
-			if(!ctype_digit ($_GET[$field])) {
-				$error = "{$field} must be a number";
-				return false;
-			}
-			$result = $_GET[$field];
-		}
-		return $result;
-	}
-
-	private function validateChars ($field, &$error = false)
-	{
-		$result = false;
-		if (isSet ($_GET[$field])) {
-			if (!preg_match ('/^[a-z A-Z]{1,40}$/', $_GET[$field])) {
-				$error = "{$field} must consist of letters only";
-				return false;
-			}
-			$result = $_GET[$field];
-		}
-		return $result;
-	}
-
 
 	private function getData ()
 	{
@@ -70,9 +44,12 @@ class thefts
 		# Select everything by default
 		$result = $theftsModel->main ();
 
+		# Create instance of APIhelper
+		require_once ("app/helpers/apihelper.php");
+		$apiHelper = new apiHelper;
 
 		# Gets theft ID, validates it in validateNumeric function, pulls data in thefts model
-		$theft = $this->validateNumeric ("theft", $error);
+		$theft = $apiHelper->validateNumeric ("theft", $error);
 		if ($error) {
 			echo $error;
 			die;
@@ -84,7 +61,7 @@ class thefts
 
 
 		# Gets page, validates it in validateNumeric function, pulls data in thefts model
-		$page = $this->validateNumeric ("page", $error);
+		$page = $apiHelper->validateNumeric ("page", $error);
 		if ($error) {
 			echo $error;
 			die;
@@ -95,7 +72,7 @@ class thefts
 		}
 
 		# Gets location, validates it in validateChars function, pulls data in thefts model
-		$location = $this->validateChars ("location", $error);
+		$location = $apiHelper->validateChars ("location", $error);
 		if ($error) {
 			echo $error;
 			die;
