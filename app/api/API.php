@@ -1,15 +1,11 @@
 <?php
 
-$API = new API;
 class API
 {
-	public function __construct ()
+	public function __construct ($database)
 	{
-		require_once ("../../.config.php");
 		# retrieve data
 		$query = $this->bboxQuery ();
-		require_once ('../helpers/database.php');
-		$database = new database ("cycletheft", $config["host"], $config["user"], $config["password"]);
 		$data = $database->retrieveData ($query);
 		$this->convertJson ($data);
 	}

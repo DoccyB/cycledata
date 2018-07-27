@@ -9,7 +9,7 @@ RewriteRule ^collisions/page/([0-9]+)/$ index.html?module=collisions&page=$1 [L]
 
 RewriteRule ^collisions/([0-9]{6}[-0-9A-Za-z]{2}[0-9]{5})/$ index.html?module=collisions&id=$1 [L]
 
-RewriteRule ^api/$ app/api/API.php [L,QSA]
+RewriteRule ^api/$ index.html?module=api [L,QSA]
 
 RewriteRule ^collisions/$ index.html?module=collisions
 
