@@ -64,6 +64,80 @@
 {* DATA TABLE *}
 	{$table}
 
+{* FILTERS *}
+	<form action="{$currentUrl}" class='filter'>
+		<h3>Filter:</h2>
+		<p>Month:</p>
+		<select name="month">
+			<option value="january">January</option>
+			<option value="february">February</option>
+			<option value="april">April</option>
+		</select> <br>
+		<p>Police Force:</p>
+		<select name="force">
+			<option value="avonAndSomerset">Avon and Somerset Constabulary</option>
+			<option value="bedfordshire">Bedfordshire Police</option>
+			<option value="britishTransportPolice">British Transport Police</option>
+			<option value="cabridgeshire">Cambridgeshire Constabulary</option>
+			<option value="cheshire">Cheshire Constabulary</option>
+			<option value="cityOfLondon">City of London Police</option>
+			<option value="cleveland">Cleveland Police</option>
+			<option value="cumbria">Cumbria Constabulary</option>
+			<option value="derbyshire">Derbyshire Constabulary</option>
+			<option value="devonAndCornwall">Devon & Cornwall Police</option>
+			<option value="dorset">Dorset Police</option>
+			<option value="durham">Durham Constabulary</option>
+			<option value="dyfedPowys">Dyfed-Powys Police</option>
+			<option value="essex">Essex Police</option>
+			<option value="gloucestershire">Gloucestershire Constabulary</option>
+			<option value="manchester">Greater Manchester Police</option>
+			<option value="gwent">Gwent Police</option>
+			<option value="hampshire">Hampshire Constabulary</option>
+			<option value="hertfordshire">Hertfordshire Constabulary</option>
+			<option value="humberside">Humberside Police</option>
+			<option value="kent">Kent Police</option>
+			<option value="lancashire">Lancashire Constabulary</option>
+			<option value="leicestershire">Leicestershire Police</option>
+			<option value="lincolnshire">Lincolnshire Police</option>
+			<option value="merseyside">Merseyside Police</option>
+			<option value="metropolitan">Metropolitan Police Service</option>
+			<option value="norfolk">Norfolk Constabulary</option>
+			<option value="northWales">North Wales Police</option>
+			<option value="northYorkshire">North Yorkshire Police</option>
+			<option value="northamptonshire">Northamptonshire Police</option>
+			<option value="northumbria">Northumbria Police</option>
+			<option value="nottinghamshire">Nottinghamshire Police</option>
+			<option value="northernIreland">Police Service of Northern Ireland</option>
+			<option value="southWales">South Wales Police</option>
+			<option value="southYorkshire">South Yorkshire Police</option>
+			<option value="staffordshire">Staffordshire Police</option>
+			<option value="suffolk">Suffolk Constabulary</option>
+			<option value="surrey">Surrey Police</option>
+			<option value="sussex">Sussex Police</option>
+			<option value="thamesValley">Thames Valley Police</option>
+			<option value="warwickshire">Warwickshire Police</option>
+			<option value="westMercia">West Mercia Police</option>
+			<option value="westMidlands">West Midlands Police</option>
+			<option value="westYorkshire">West Yorkshire Police</option>
+			<option value="wiltshire">Wiltshire Police</option>
+
+		</select><br>
+		<p>Crime Status</p>
+		<select name="status">
+			<option value="underInvestigation">Under investigation</option>
+			<option value="IdFailed">Investigation complete; no suspect identified</option>
+			<option value="unableToProsecute">Unable to prosecute suspect</option>
+			<option value="localResolution">Local resolution</option>
+			<option value="awaitingOutcome">Awaiting court outcome</option>
+			<option value="notGuilty">Defendant found not guilty</option>
+			<option value="fined">Offender fined</option>
+			<option value="communitySentence">Offender given community sentence</option>
+			<option value="noFormalAction">Formal action is not in the public interest</option>
+		</select><br><br>
+		<input type="submit" value="Go!">
+	</form>
+
+
 {* MAP *}
 	<div id="map"></div>
 
