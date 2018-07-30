@@ -7,7 +7,7 @@ class html
 	{
 
 	# Table headings
-                $table  = "<table style='width:80%'>\n\t\t<tr>";
+                $table  = "<table style='width:70%'>\n\t\t<tr>";
 
 		foreach($data[0] as $tableHeading=>$value) {
 			$table .= "\n\t\t\t<th>{$tableHeading}</th>";

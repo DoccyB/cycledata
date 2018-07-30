@@ -41,6 +41,8 @@ h1 {
 }
 
 table {
+	float: left;
+	margin: 10px;
 	border-collapse: collapse;
 	text-align: center;
 	margin: 0 auto;
@@ -95,4 +97,9 @@ a {
 
 .pageBar li a:hover {
 	background-color: lightgray;
+}
+
+.filter {
+	float: right;
+	margin: 20px;
 }
