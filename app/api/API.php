@@ -13,7 +13,7 @@ class API
 	private function bboxQuery ()
 	{
                 if (isSet ($_GET['bbox'])) {
-			if (!preg_match ('/^([0-9.]+),([0-9.]+),([0-9.]+),([0-9.]+)$/', $_GET['bbox'], $coords)) {
+			if (!preg_match ('/^([-0-9.]+),([-0-9.]+),([-0-9.]+),([-0-9.]+)$/', $_GET['bbox'], $coords)) {
 				echo "Invalid bbox";
 				die;
 			}
