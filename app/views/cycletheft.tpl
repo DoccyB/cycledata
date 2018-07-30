@@ -37,12 +37,25 @@
 
 {* DATA PAGE NAVIGATION BAR *}
 	<ul class="pageBar">
+	{* previous page button *}
 	{if $pagination.currentPage != 1}
-		<li><a href="/cycledata/page/{$pagination.previousPage}/"><</a></li>
+	<li><a href="/cycledata/page/{$pagination.previousPage}/"><</a></li>
 	{/if}
-	{for $pageNumber = 1 to $pagination.finalPage}
+	{* only display pages +/- 5 to current page *}
+	{if $pagination.currentPage < 7}}
+	{for $pageNumber = 1 to 11}
 	<li><a href="/cycledata/page/{$pageNumber}/">{$pageNumber}</a></li>
 	{/for}
+	{elseif $pagination.currentPage > $pagination.finalPage - 6}
+	{for $pageNumber = $pagination.finalPage - 10 to $pagination.finalPage}
+	<li><a href="/cycledata/page/{$pageNumber}/">{$pageNumber}</a></li>
+	{/for}
+	{else}
+	{for $pageNumber = $pagination.currentPage - 5 to $pagination.currentPage + 5}
+	<li><a href="/cycledata/page/{$pageNumber}/">{$pageNumber}</a></li>
+	{/for}
+	{/if}
+	{* next page button *}
 	{if $pagination.currentPage != $pagination.finalPage}
 	<li><a href="/cycledata/page/{$pagination.nextPage}/">></a></li>
 	{/if}
