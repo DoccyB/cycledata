@@ -4,6 +4,8 @@ class thefts
 {
 	private $smarty;
 	private $database;
+	private $theftsModel;
+	private $tableName = "crimes";
 
 	# Constructs webpage
 	public function __construct ($smarty, $database)
@@ -11,6 +13,10 @@ class thefts
 		# Assign libraries to class variables
 		$this->smarty = $smarty;
 		$this->database = $database;
+
+		require_once ("app/models/theftsmodel.php");
+		$this->theftsModel = new theftsModel ($this->database);
+
 
 		# Get data
 		$result = $this->getData ();
@@ -36,13 +42,8 @@ class thefts
 
 	private function getData ()
 	{
-
-		# Create instance of thefts model
-		require_once ("app/models/theftsmodel.php");
-		$theftsModel = new theftsModel ($this->database);
-
 		# Select everything by default
-		$result = $theftsModel->main ();
+		$result = $this->theftsModel->main ();
 
 		# Create instance of APIhelper
 		require_once ("app/helpers/apihelper.php");
@@ -59,13 +60,13 @@ class thefts
 		foreach ($getVals as $field => $validation) {
 			$get = $apiHelper->validate ($field, $validation);
 			if ($get) {
-				$result = $theftsModel->$field ($get);
+				$result = $this->theftsModel->$field ($get);
 			}
 		}
 
 		# Execute form submitted for new entry
 		if ($_POST) {
-			$this->database->newRow("crimes", $_POST);
+			$this->database->newRow("{$this->tableName}", $_POST);
 		}
 
 		return $result;
@@ -81,12 +82,12 @@ class thefts
 
 
 		# Assign array of table headings => heading description
-		$headings = $this->database->getHeadings ("crimes");
+		$headings = $this->database->getHeadings ("{$this->tableName}");
 		$this->smarty->assign ('headings', $headings);
 
 
 		# Get number of data pages needed
-		$countEntries = $this->database->retrieveOneValue ("SELECT count(*) from crimes");
+		$countEntries = $this->database->retrieveOneValue ("SELECT count(*) from {$this->tableName}");
 		$finalPage = ceil ($countEntries / 10);
 
 		# If page number requested, assign values to current, next, previous page
@@ -105,6 +106,19 @@ class thefts
 			'previousPage' => $previousPage,
 		);
 		$this->smarty->assign ('pagination', $pagination);
+
+
+		# Assign array of distinct values for table headings
+		$distinctDates = array_column($this->database->distinctValues ($this->tableName, "date"), "date");
+		$distinctReportedBy = array_column($this->database->distinctValues ($this->tableName, "reportedBy"), "reportedBy");
+		$distinctStatuses = array_column($this->database->distinctValues ($this->tableName, "status"), "status");
+
+		$distinctValues = array (
+			'date'       => $distinctDates,
+			'reportedBy' => $distinctReportedBy,
+			'status'     => $distinctStatuses,
+		);
+		$this->smarty->assign ('distinctValues', $distinctValues);
 
         }
 
