@@ -25,6 +25,7 @@ class API
 			longitude < {$coords[3]} AND
 			latitude  > {$coords[2]} AND
 			latitude  < {$coords[4]}
+			LIMIT 50
 		;";
 		return $query;
 	}
