@@ -77,6 +77,15 @@ class database
 		$this->pdo->query ($query);
 
 	}
+
+
+	public function distinctValues ($tableName, $field)
+	{
+		$query = "SELECT DISTINCT {$field} FROM {$tableName}";
+		$result = $this->retrieveData ($query);
+		return $result;
+	}
+
 }
 
 ?>
